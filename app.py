@@ -36,7 +36,7 @@ mapa_mundi = {
     # ================= AMÉRICAS =================
     "Rio de Janeiro": {
         "conexoes": ["Lima", "Nova York", "Tóquio", "Buenos Aires", "Cidade do Cabo"],
-        "imagem": "https://drive.google.com/file/d/1OLHQ15zmoZLlFsNGVACOOMf9x9QGuWAy/view?usp=drive_link",
+        "imagem": "https://drive.google.com/file/d/1OLHQ15zmoZLlFsNGVACOOMf9x9QGuWAy/view?usp=sharing",
         "fatos": [
             "O suspeito queria ver o Cristo Redentor.",
             "Trocou dinheiro por Reais.",
