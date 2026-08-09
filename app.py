@@ -285,7 +285,7 @@ locais_geograficos = ["Banco", "Aeroporto", "Porto", "Livraria", "Mercado Centra
 # ==========================================
 def calcular_dificuldade(casos):
     if casos == 0:
-        return "Recruta", 4, 120, False
+        return "Recruta", 5, 120, False
     elif casos == 1:
         return "Detetive Júnior", 5, 110, False
     elif casos == 2:
