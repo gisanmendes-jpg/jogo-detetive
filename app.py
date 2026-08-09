@@ -103,7 +103,7 @@ mapa_mundi = {
     },
     "Toronto": {
         "conexoes": ["Nova York", "Cidade do México"],
-        "imagem": "https://placehold.co/800x300/B22222/FFFFFF?text=Toronto",
+        "imagem": "toro.jpg",
         "fatos": [
             "Reclamou do frio e comprou um casaco muito pesado.",
             "Tinha um broche com uma folha de bordo (maple) vermelha.",
@@ -116,7 +116,7 @@ mapa_mundi = {
     },
     "Los Angeles": {
         "conexoes": ["Nova York", "Cidade do México", "Sydney", "Tóquio"],
-        "imagem": "https://placehold.co/800x300/FF8C00/FFFFFF?text=Los+Angeles",
+        "imagem": "la.jpg",
         "fatos": [
             "Estava procurando o letreiro gigante de Hollywood nas colinas.",
             "Perguntou onde ficava a Calçada da Fama.",
@@ -131,7 +131,7 @@ mapa_mundi = {
     # ================= EUROPA =================
     "Paris": {
         "conexoes": ["Nova York", "Londres", "Roma", "Berlim"],
-        "imagem": "https://placehold.co/800x300/778899/FFFFFF?text=Paris",
+        "imagem": "paris.jpg",
         "fatos": [
             "Disse que faria um piquenique aos pés da Torre Eiffel.",
             "Tinha um broche com uma bandeira listrada em azul, branco e vermelho.",
@@ -144,7 +144,7 @@ mapa_mundi = {
     },
     "Londres": {
         "conexoes": ["Paris", "Cidade do México", "Nova York", "Berlim", "Roma", "Nova Délhi", "Dubai"],
-        "imagem": "https://placehold.co/800x300/696969/FFFFFF?text=Londres",
+        "imagem": "londres.jpg",
         "fatos": [
             "Estava tomando chá preto pontualmente às 17h.",
             "Queria ajustar o relógio para bater com o horário do Big Ben.",
