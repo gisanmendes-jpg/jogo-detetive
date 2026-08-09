@@ -1,6 +1,6 @@
 import streamlit as st
 import random
-from PIL import Image  # <-- É esta linha que resolve o seu erro!
+from PIL import Image
 
 # Inicia a variável de carreira INDEPENDENTE do jogo estar rodando
 if 'casos_resolvidos' not in st.session_state:
@@ -10,8 +10,10 @@ if 'casos_resolvidos' not in st.session_state:
 # 1. BANCOS DE DADOS (COM IMAGENS)
 # ==========================================
 banco_capangas = [
-    {"nome": "Gabi Aura Monster", "sexo": "F", "cabelo": "Castanho", "olho" : "Castanho", "detalhes": "Jóia", "imagem": "gabi.png"},
-    {"nome": "Denji",  "sexo": "M", "cabelo": "Loiro", "olho" : "Castanho", "detalhes": "Tapa olho", "imagem": "denji.jpg"},
+    # Exemplo de como cadastrar as novas imagens (Triste/Feliz):
+    {"nome": "Gabi Aura Monster", "sexo": "F", "cabelo": "Castanho", "olho" : "Castanho", "detalhes": "Jóia", "imagem": "gabi.png", "imagem_preso": "gabi_triste.png", "imagem_fuga": "gabi_feliz.png"},
+    {"nome": "Denji",  "sexo": "M", "cabelo": "Loiro", "olho" : "Castanho", "detalhes": "Tapa olho", "imagem": "denji.jpg", "imagem_preso": "denji_triste.jpg", "imagem_fuga": "denji_feliz.jpg"},
+    
     {"nome": "Nana",  "sexo": "F", "cabelo": "Ruivo", "olho" : "Amarelo", "detalhes": "Jóia", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Nana"},
     {"nome": "Gisa Estrela",  "sexo": "F", "cabelo": "Castanho", "olho" : "Castanho", "detalhes": "Tatuagem", "imagem": "gisa.png"},
     {"nome": "Scarlet",  "sexo": "F", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Cicatriz", "imagem": "https://placehold.co/300x400/8B0000/FFFFFF?text=Scarlet"},
@@ -292,7 +294,7 @@ mapa_mundi = {
         "conexoes": ["Tóquio", "Lima", "Pequim", "Los Angeles", "Bangkok"],
         "imagem": "sy.jpg",
         "fatos": [
-            "Queria ir a um santuário ver cangurus e coalas.",
+            "Queria ir a santuário ver cangurus e coalas.",
             "Foi fotografar a famosa Casa de Ópera com formato de velas.",
             "Comprou uma prancha de surfe e foi para Bondi Beach.",
             "Disse que iria mergulhar na Grande Barreira de Corais.",
@@ -371,16 +373,13 @@ if 'horas_restantes' not in st.session_state:
 # ==========================================
 st.set_page_config(page_title="DIE - Investigações", page_icon="🕵️", layout="wide")
 
-# Banner de Título (Substitui o st.title)
-# Substitua o número 600 pelo tamanho que achar melhor
-# 1. O Python abre a sua imagem original
-imagem_original = Image.open("banner.jpg")
-
-# 2. Você força o novo tamanho: (Largura, Altura) em pixels
-imagem_achatada = imagem_original.resize((1200, 400))
-
-# 3. Manda o Streamlit exibir a nova imagem já alterada
-st.image(imagem_achatada)
+# Banner de Título
+try:
+    imagem_original = Image.open("banner.jpg")
+    imagem_achatada = imagem_original.resize((1200, 400))
+    st.image(imagem_achatada)
+except:
+    st.warning("Banner não encontrado.")
 
 # Cabeçalho Superior
 col_header1, col_header2 = st.columns([3, 1])
@@ -514,15 +513,21 @@ if not st.session_state.jogo_acabou:
         st.session_state.mensagem_tela = f"Você entregou seu distintivo e abandonou a investigação. O culpado era: {st.session_state.vilao['nome']}."
         st.rerun()
 
-# Se o jogo acabou
+# ==========================================
+# TELA FINAL (MUDANÇA DE IMAGEM)
+# ==========================================
 else:
     st.divider()
     
-    st.image(st.session_state.vilao["imagem"], width=250, caption=f"IDENTIDADE DO VILÃO: {st.session_state.vilao['nome'].upper()}")
-    
     if st.session_state.venceu_atual:
+        # Puxa a imagem triste (preso). Se não existir ainda, usa a normal como segurança.
+        imagem_final = st.session_state.vilao.get("imagem_preso", st.session_state.vilao["imagem"])
+        st.image(imagem_final, width=250, caption=f"VILÃO CAPTURADO: {st.session_state.vilao['nome'].upper()}")
         st.success("Você solucionou o caso! O seu registro foi atualizado.")
     else:
+        # Puxa a imagem feliz (fuga). Se não existir ainda, usa a normal como segurança.
+        imagem_final = st.session_state.vilao.get("imagem_fuga", st.session_state.vilao["imagem"])
+        st.image(imagem_final, width=250, caption=f"VILÃO FORAGIDO: {st.session_state.vilao['nome'].upper()}")
         st.error("Caso encerrado sem sucesso. O seu registro permanecerá o mesmo.")
         
     if st.button("🚔 Solicitar Novo Caso à DIE"):
