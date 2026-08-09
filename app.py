@@ -52,7 +52,7 @@ mapa_mundi = {
     },
     "Lima": {
         "conexoes": ["Rio de Janeiro", "Nova York", "Cidade do México", "Buenos Aires", "Sydney"],
-        "imagem": "https://placehold.co/800x300/8B4513/FFFFFF?text=Lima",
+        "imagem": "lima.jpg",
         "fatos": [
             "Queria conhecer o estádio Monumental onde o Flamengo foi campeão.",
             "Perguntou sobre as ruínas de Machu Picchu.",
