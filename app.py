@@ -1,27 +1,33 @@
 import streamlit as st
 import random
 
+# Inicia a variável de carreira INDEPENDENTE do jogo estar rodando
+if 'casos_resolvidos' not in st.session_state:
+    st.session_state.casos_resolvidos = 0
+
 # ==========================================
 # 1. BANCOS DE DADOS
 # ==========================================
 banco_capangas = [
-    {"nome": "Gabi Aura Monster", "sexo": "F", "cabelo": "Castanho", "detalhes": "Jóia"},
-    {"nome": "Denji",  "sexo": "M", "cabelo": "Loiro", "detalhes": "Tapa olho"},
-    {"nome": "Nana",  "sexo": "F", "cabelo": "Ruivo", "detalhes": "Jóia"},
-    {"nome": "Gisa Estrela",  "sexo": "F", "cabelo": "Castanho", "detalhes": "Tatuagem"},
-    {"nome": "Scarlet",  "sexo": "F", "cabelo": "Preto", "detalhes": "Cicatriz"},
-    {"nome": "Ryan",  "sexo": "M", "cabelo": "Preto", "detalhes": "Jóia"},
-    {"nome": "Mayah",  "sexo": "F", "cabelo": "Preto", "detalhes": "Tapa olho"},
-    {"nome": "Elsa",  "sexo": "F", "cabelo": "Preto", "detalhes": "Jóia"},
-    {"nome": "Douma",  "sexo": "M", "cabelo": "Loiro", "detalhes": "Tatuagem"},
-    {"nome": "Haru",  "sexo": "M", "cabelo": "Branco", "detalhes": "Tapa olho"},
-    {"nome": "Roger",  "sexo": "M", "cabelo": "Preto", "detalhes": "Tatuagem"},
-    {"nome": "Clara",  "sexo": "F", "cabelo": "Preto", "detalhes": "Cicatriz"}
+    {"nome": "Gabi Aura Monster", "sexo": "F", "cabelo": "Castanho", "olho" : "Castanho", "detalhes": "Jóia"},
+    {"nome": "Denji",  "sexo": "M", "cabelo": "Loiro", "olho" : "Castanho", "detalhes": "Tapa olho"},
+    {"nome": "Nana",  "sexo": "F", "cabelo": "Ruivo", "olho" : "Amarelo", "detalhes": "Jóia"},
+    {"nome": "Gisa Estrela",  "sexo": "F", "cabelo": "Castanho", "olho" : "Castanho", "detalhes": "Tatuagem"},
+    {"nome": "Scarlet",  "sexo": "F", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Cicatriz"},
+    {"nome": "Ryan",  "sexo": "M", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Jóia"},
+    {"nome": "Mayah",  "sexo": "F", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Tapa olho"},
+    {"nome": "Elsa",  "sexo": "F", "cabelo": "Preto", "olho" : "Azul", "detalhes": "Jóia"},
+    {"nome": "Douma",  "sexo": "M", "cabelo": "Loiro", "olho" : "Amarelo", "detalhes": "Tatuagem"},
+    {"nome": "Haru",  "sexo": "M", "cabelo": "Branco", "olho" : "Amarelo", "detalhes": "Tapa olho"},
+    {"nome": "Roger",  "sexo": "M", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Tatuagem"},
+    {"nome": "Clara",  "sexo": "F", "cabelo": "Preto", "olho" : "Azul", "detalhes": "Jóia"},
+    {"nome": "Loira Burrinha",  "sexo": "F", "cabelo": "Loiro", "olho" : "Azul", "detalhes": "Jóia"},
+    {"nome": "Victor",  "sexo": "M", "cabelo": "Branco", "olho" : "Castanho", "detalhes": "Cicatriz"}
 ]
 
 banco_chefes = [
-    {"nome": "Makima",  "sexo": "F", "cabelo": "Ruivo", "detalhes": "Tatuagem"},
-    {"nome": "Muzan",  "sexo": "M", "cabelo": "Branco", "detalhes": "Cicatriz"}
+    {"nome": "Makima",  "sexo": "F", "cabelo": "Ruivo", "olho" : "Amarelo", "detalhes": "Tatuagem"},
+    {"nome": "Muzan",  "sexo": "M", "cabelo": "Branco", "olho" : "Vermelho", "detalhes": "Cicatriz"}
 ]
 
 banco_suspeitos = banco_capangas + banco_chefes
@@ -285,7 +291,7 @@ locais_geograficos = ["Banco", "Aeroporto", "Porto", "Livraria", "Mercado Centra
 # ==========================================
 def calcular_dificuldade(casos):
     if casos == 0:
-        return "Recruta", 5, 120, False
+        return "Recruta", 4, 120, False
     elif casos == 1:
         return "Detetive Júnior", 5, 110, False
     elif casos == 2:
@@ -298,7 +304,6 @@ def calcular_dificuldade(casos):
         return "Super Detetive", 9, 80, True
 
 def sortear_locais():
-    # Sorteia os locais e os armazena no estado da sessão para não mudarem sozinhos
     st.session_state.locais_cidade = random.sample(locais_fisicos, 1) + random.sample(locais_geograficos, 2)
     random.shuffle(st.session_state.locais_cidade)
 
@@ -368,19 +373,23 @@ st.sidebar.write("Cruze os dados para emitir o mandado. Custa 1h.")
 
 p_sex = st.sidebar.selectbox("Sexo", ["---", "F", "M"])
 p_cab = st.sidebar.selectbox("Cabelo", ["---", "Castanho", "Preto", "Loiro", "Ruivo", "Branco"])
+# Novo menu suspenso para a cor dos olhos
+p_olh = st.sidebar.selectbox("Cor dos Olhos", ["---", "Castanho", "Amarelo", "Vermelho", "Azul"])
 p_det = st.sidebar.selectbox("Detalhe", ["---", "Jóia", "Tatuagem", "Cicatriz", "Tapa olho"])
 
 if st.sidebar.button("🚨 Emitir Mandado", disabled=st.session_state.jogo_acabou):
     st.session_state.horas_restantes -= 1
     
-    # Converte os "---" para None para bater com a lógica do seu código
     sexo_filtro = p_sex if p_sex != "---" else None
     cabelo_filtro = p_cab if p_cab != "---" else None
+    olho_filtro = p_olh if p_olh != "---" else None
     detalhe_filtro = p_det if p_det != "---" else None
 
+    # Lógica de filtro atualizada para checar a chave "olho"
     filtrados = [s for s in banco_suspeitos if 
                  (sexo_filtro is None or s["sexo"] == sexo_filtro) and
                  (cabelo_filtro is None or s["cabelo"] == cabelo_filtro) and
+                 (olho_filtro is None or s["olho"] == olho_filtro) and
                  (detalhe_filtro is None or s["detalhes"] == detalhe_filtro)]
     
     if len(filtrados) == 1:
@@ -431,9 +440,11 @@ if not st.session_state.jogo_acabou:
                         proximo_destino = st.session_state.rota_fuga[indice + 1]
                         
                         if local in locais_fisicos: 
+                            # Atualizado para incluir dicas sobre a cor dos olhos
                             dicas_fisicas = [
                                 f"Notei que era uma pessoa do sexo {st.session_state.vilao['sexo']}.",
-                                f"A pessoa tinha cabelo {st.session_state.vilao['cabelo']}."
+                                f"A pessoa tinha cabelo {st.session_state.vilao['cabelo']}.",
+                                f"Reparei que a pessoa tinha olhos de cor {st.session_state.vilao['olho']}."
                             ]
                             if st.session_state.vilao["detalhes"] == "---":
                                 dicas_fisicas.append("Não notei nenhuma joia, tatuagem, cicatriz ou tapa olho.")
@@ -462,7 +473,7 @@ if not st.session_state.jogo_acabou:
                 sortear_locais() 
                 st.rerun()
 
-    # === NOVO: BOTÃO DE ABANDONAR O CASO ===
+    # BOTÃO DE ABANDONAR O CASO
     st.divider()
     if st.button("🚪 Abandonar o Caso (Entregar Distintivo)"):
         st.session_state.jogo_acabou = True
