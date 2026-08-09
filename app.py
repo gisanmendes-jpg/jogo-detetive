@@ -372,7 +372,14 @@ st.set_page_config(page_title="DIE - Investigações", page_icon="🕵️", layo
 
 # Banner de Título (Substitui o st.title)
 # Substitua o número 600 pelo tamanho que achar melhor
-st.image("banner.jpg", width=600)
+# 1. O Python abre a sua imagem original
+imagem_original = Image.open("banner.jpg")
+
+# 2. Você força o novo tamanho: (Largura, Altura) em pixels
+imagem_achatada = imagem_original.resize((1000, 250))
+
+# 3. Manda o Streamlit exibir a nova imagem já alterada
+st.image(imagem_achatada)
 
 # Cabeçalho Superior
 col_header1, col_header2 = st.columns([3, 1])
