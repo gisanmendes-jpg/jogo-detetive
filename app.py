@@ -5,14 +5,22 @@ from PIL import Image
 # ==========================================
 # SETUP INICIAL DAS VARIÁVEIS DE SESSÃO
 # ==========================================
+# ==========================================
+# SETUP INICIAL DAS VARIÁVEIS DE SESSÃO
+# ==========================================
 if 'casos_resolvidos' not in st.session_state:
     st.session_state.casos_resolvidos = 0
 if 'tela_atual' not in st.session_state:
-    st.session_state.tela_atual = "inicio" # Controla em qual tela estamos (inicio, briefing, jogo)
+    st.session_state.tela_atual = "inicio"
 if 'nome_jogador' not in st.session_state:
     st.session_state.nome_jogador = ""
 if 'artefato_roubado' not in st.session_state:
     st.session_state.artefato_roubado = ""
+
+# --- TRAVA DE SEGURANÇA CONTRA CACHE ANTIGO ---
+if st.session_state.nome_jogador == "":
+    st.session_state.tela_atual = "inicio"
+# ----------------------------------------------
 
 # ==========================================
 # 1. BANCOS DE DADOS (COM IMAGENS E ARTEFATOS)
