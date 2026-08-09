@@ -10,7 +10,7 @@ if 'casos_resolvidos' not in st.session_state:
 # 1. BANCOS DE DADOS (COM IMAGENS)
 # ==========================================
 banco_capangas = [
-    {"nome": "Gabi Aura Monster", "sexo": "F", "cabelo": "Castanho", "olho" : "Castanho", "detalhes": "Jóia", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Gabi+Aura"},
+    {"nome": "Gabi Aura Monster", "sexo": "F", "cabelo": "Castanho", "olho" : "Castanho", "detalhes": "Jóia", "imagem": "gabi.png"},
     {"nome": "Denji",  "sexo": "M", "cabelo": "Loiro", "olho" : "Castanho", "detalhes": "Tapa olho", "imagem": "https://placehold.co/300x400/FF8C00/FFFFFF?text=Denji"},
     {"nome": "Nana",  "sexo": "F", "cabelo": "Ruivo", "olho" : "Amarelo", "detalhes": "Jóia", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Nana"},
     {"nome": "Gisa Estrela",  "sexo": "F", "cabelo": "Castanho", "olho" : "Castanho", "detalhes": "Tatuagem", "imagem": "gisa.png"},
