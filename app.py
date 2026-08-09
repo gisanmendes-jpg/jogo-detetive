@@ -19,7 +19,7 @@ banco_capangas = [
     {"nome": "Mayah",  "sexo": "F", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Tapa olho", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Mayah"},
     {"nome": "Elsa",  "sexo": "F", "cabelo": "Preto", "olho" : "Azul", "detalhes": "Jóia", "imagem": "https://placehold.co/300x400/87CEFA/FFFFFF?text=Elsa"},
     {"nome": "Douma",  "sexo": "M", "cabelo": "Loiro", "olho" : "Amarelo", "detalhes": "Tatuagem", "imagem": "douma.jpg"},
-    {"nome": "Haru",  "sexo": "M", "cabelo": "Branco", "olho" : "Amarelo", "detalhes": "Tapa olho", "imagem": "https://placehold.co/300x400/CCCCCC/000000?text=Haru"},
+    {"nome": "Haru",  "sexo": "M", "cabelo": "Branco", "olho" : "Amarelo", "detalhes": "Tapa olho", "imagem": "haru.jpg"},
     {"nome": "Roger",  "sexo": "M", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Tatuagem", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Roger"},
     {"nome": "Clara",  "sexo": "F", "cabelo": "Preto", "olho" : "Azul", "detalhes": "Cicatriz", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Clara"},
     {"nome": "Loira Burrinha",  "sexo": "F", "cabelo": "Loiro", "olho" : "Azul", "detalhes": "Jóia", "imagem": "lb.jpg"},
