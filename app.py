@@ -157,7 +157,7 @@ mapa_mundi = {
     },
     "Roma": {
         "conexoes": ["Paris", "Londres", "Cairo", "Berlim"],
-        "imagem": "https://placehold.co/800x300/DAA520/FFFFFF?text=Roma",
+        "imagem": "roma.jpg",
         "fatos": [
             "Perguntou como chegar às ruínas do Coliseu.",
             "Foi visto jogando uma moeda na Fonte de Trevi.",
@@ -170,7 +170,7 @@ mapa_mundi = {
     },
     "Berlim": {
         "conexoes": ["Paris", "Londres", "Roma", "Moscou"],
-        "imagem": "https://placehold.co/800x300/2F4F4F/FFFFFF?text=Berlim",
+        "imagem": "berlim.jpg",
         "fatos": [
             "Perguntou onde ficavam os restos do famoso muro que dividiu a cidade.",
             "Foi tirar uma foto no Portão de Brandemburgo.",
@@ -183,7 +183,7 @@ mapa_mundi = {
     },
     "Moscou": {
         "conexoes": ["Tóquio", "Berlim", "Pequim"],
-        "imagem": "https://placehold.co/800x300/8B0000/FFFFFF?text=Moscou",
+        "imagem": "moscou.jpg",
         "fatos": [
             "Comprou um conjunto de bonecas Matrioscas.",
             "Queria passear pela famosa Praça Vermelha.",
@@ -198,7 +198,7 @@ mapa_mundi = {
     # ================= ÁSIA, ÁFRICA E OCEANIA =================
     "Tóquio": {
         "conexoes": ["Rio de Janeiro", "Moscou", "Pequim", "Sydney", "Los Angeles"],
-        "imagem": "https://placehold.co/800x300/FF69B4/FFFFFF?text=Toquio",
+        "imagem": "toquio.jpg",
         "fatos": [
             "Estava estudando o alfabeto japonês.",
             "Mencionou que queria escalar o Monte Fuji.",
@@ -211,7 +211,7 @@ mapa_mundi = {
     },
     "Pequim": {
         "conexoes": ["Tóquio", "Sydney", "Moscou", "Nova Délhi", "Bangkok"],
-        "imagem": "https://placehold.co/800x300/DC143C/FFFFFF?text=Pequim",
+        "imagem": "pequim.jpg",
         "fatos": [
             "Perguntou qual era o melhor trecho para visitar a Grande Muralha.",
             "Queria entrar no palácio imperial da Cidade Proibida.",
@@ -224,7 +224,7 @@ mapa_mundi = {
     },
     "Nova Délhi": {
         "conexoes": ["Londres", "Cairo", "Pequim", "Dubai", "Bangkok"],
-        "imagem": "https://placehold.co/800x300/D2691E/FFFFFF?text=Nova+Delhi",
+        "imagem": "nd.jpg",
         "fatos": [
             "Tinha um bilhete de trem para ver o Taj Mahal.",
             "Trocou o dinheiro por Rúpias.",
@@ -237,7 +237,7 @@ mapa_mundi = {
     },
     "Bangkok": {
         "conexoes": ["Pequim", "Nova Délhi", "Sydney"],
-        "imagem": "https://placehold.co/800x300/FFD700/000000?text=Bangkok",
+        "imagem": "bk.jpg",
         "fatos": [
             "Reclamou do forte calor tropical.",
             "Tinha um guia sobre templos budistas cheios de ouro.",
@@ -250,7 +250,7 @@ mapa_mundi = {
     },
     "Dubai": {
         "conexoes": ["Cairo", "Nova Délhi", "Londres"],
-        "imagem": "https://placehold.co/800x300/C0C0C0/000000?text=Dubai",
+        "imagem": "dubai.jpg",
         "fatos": [
             "Perguntou se o elevador para o prédio mais alto do mundo demorava muito.",
             "Trocou seu dinheiro por Dirhams.",
