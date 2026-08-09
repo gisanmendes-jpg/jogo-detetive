@@ -4,7 +4,7 @@ import random
 # Inicia a variável de carreira INDEPENDENTE do jogo estar rodando
 if 'casos_resolvidos' not in st.session_state:
     st.session_state.casos_resolvidos = 0
-
+casos = 5:
 # ==========================================
 # 1. BANCOS DE DADOS
 # ==========================================
