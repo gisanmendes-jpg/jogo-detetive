@@ -459,8 +459,16 @@ if not st.session_state.jogo_acabou:
                 st.session_state.local_atual = dest
                 st.session_state.horas_restantes -= 8
                 st.session_state.mensagem_tela = f"Você viajou para {dest}."
-                sortear_locais() # Sorteia os locais da nova cidade
+                sortear_locais() 
                 st.rerun()
+
+    # === NOVO: BOTÃO DE ABANDONAR O CASO ===
+    st.divider()
+    if st.button("🚪 Abandonar o Caso (Entregar Distintivo)"):
+        st.session_state.jogo_acabou = True
+        st.session_state.venceu_atual = False
+        st.session_state.mensagem_tela = f"Você entregou seu distintivo e abandonou a investigação. O culpado era: {st.session_state.vilao['nome']}."
+        st.rerun()
 
 # Se o jogo acabou (Exibe Tela de Resumo e Restart)
 else:
