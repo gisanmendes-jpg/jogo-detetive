@@ -27,7 +27,7 @@ banco_capangas = [
 ]
 
 banco_chefes = [
-    {"nome": "Makima",  "sexo": "F", "cabelo": "Ruivo", "olho" : "Amarelo", "detalhes": "Tatuagem", "imagem": "https://placehold.co/300x400/DC143C/FFFFFF?text=Makima"},
+    {"nome": "Makima",  "sexo": "F", "cabelo": "Ruivo", "olho" : "Amarelo", "detalhes": "Tatuagem", "imagem": "makima.jpg"},
     {"nome": "Muzan",  "sexo": "M", "cabelo": "Branco", "olho" : "Vermelho", "detalhes": "Cicatriz", "imagem": "https://placehold.co/300x400/1A1A1A/FFFFFF?text=Muzan"}
 ]
 
