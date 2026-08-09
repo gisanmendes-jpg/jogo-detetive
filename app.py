@@ -2,9 +2,9 @@ import streamlit as st
 import random
 from PIL import Image
 
-# ==========================================
-# SETUP INICIAL DAS VARIÁVEIS DE SESSÃO
-# ==========================================
+# Configuração da página DEVE ser o primeiro comando Streamlit!
+st.set_page_config(page_title="DIE - Investigações", page_icon="🕵️", layout="wide")
+
 # ==========================================
 # SETUP INICIAL DAS VARIÁVEIS DE SESSÃO
 # ==========================================
