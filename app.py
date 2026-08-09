@@ -36,7 +36,7 @@ mapa_mundi = {
     # ================= AMÉRICAS =================
     "Rio de Janeiro": {
         "conexoes": ["Lima", "Nova York", "Tóquio", "Buenos Aires", "Cidade do Cabo"],
-        "imagem": "https://placehold.co/400x150/2E8B57/FFFFFF?text=Rio+de+Janeiro",
+        "imagem": "https://drive.google.com/file/d/1OLHQ15zmoZLlFsNGVACOOMf9x9QGuWAy/view?usp=drive_link",
         "fatos": [
             "O suspeito queria ver o Cristo Redentor.",
             "Trocou dinheiro por Reais.",
@@ -96,7 +96,6 @@ mapa_mundi = {
             "Foi visto comendo um alfajor de doce de leite.",
             "Perguntou onde poderia assistir a um show de Tango.",
             "Trocou seu dinheiro por Pesos Argentinos.",
-            "Comprou uma camisa da seleção com o número 10 nas costas.",
             "Queria tirar uma foto em frente ao enorme Obelisco da cidade.",
             "Perguntou como chegar ao bairro colorido do Caminito.",
             "Disse que queria ver a Casa Rosada."
