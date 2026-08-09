@@ -2,12 +2,13 @@ import streamlit as st
 import random
 from PIL import Image
 
-# Inicia a variável de carreira INDEPENDENTE do jogo estar rodando
-if 'casos_resolvidos' not in st.session_state:
-    st.session_state.casos_resolvidos = 0
+# ==========================================
+# 1. SETUP DE PÁGINA (DEVE SER A PRIMEIRA COISA!)
+# ==========================================
+st.set_page_config(page_title="DIE - Investigações", page_icon="🕵️", layout="wide")
 
 # ==========================================
-# 1. BANCOS DE DADOS (COM IMAGENS)
+# 2. BANCOS DE DADOS (COM IMAGENS E ARTEFATOS)
 # ==========================================
 banco_capangas = [
     {"nome": "Gabi Aura Monster", "sexo": "F", "cabelo": "Castanho", "olho" : "Castanho", "detalhes": "Jóia", "imagem": "gabi.png", "imagem_preso": "gabi_triste.png", "imagem_fuga": "gabi_feliz.png"},
@@ -33,8 +34,18 @@ banco_chefes = [
 
 banco_suspeitos = banco_capangas + banco_chefes
 
+banco_artefatos = [
+    "o Cetro de Ouro do Imperador",
+    "a fórmula secreta de um novo supercomputador",
+    "o famoso diamante 'Estrela da Noite'",
+    "a pintura original mais cara do mundo",
+    "os códigos de acesso de satélites globais",
+    "uma relíquia arqueológica inestimável",
+    "os planos secretos da agência rival",
+    "o projeto original do motor de dobra espacial"
+]
+
 mapa_mundi = {
-    # ================= AMÉRICAS =================
     "Rio de Janeiro": {
         "conexoes": ["Lima", "Nova York", "Tóquio", "Buenos Aires", "Cidade do Cabo"],
         "imagem": "rj.jpg",
@@ -128,8 +139,6 @@ mapa_mundi = {
             "Trocou seu dinheiro por Dólares Americanos e foi surfar."
         ]
     },
-
-    # ================= EUROPA =================
     "Paris": {
         "conexoes": ["Nova York", "Londres", "Roma", "Berlim"],
         "imagem": "paris.jpg",
@@ -195,8 +204,6 @@ mapa_mundi = {
             "Foi visto observando a arquitetura colorida da Catedral de São Basílio."
         ]
     },
-
-    # ================= ÁSIA, ÁFRICA E OCEANIA =================
     "Tóquio": {
         "conexoes": ["Rio de Janeiro", "Moscou", "Pequim", "Sydney", "Los Angeles"],
         "imagem": "toquio.jpg",
@@ -307,7 +314,7 @@ locais_fisicos = ["Hotel", "Clube Esportivo", "Restaurante", "Cafeteria", "Spa"]
 locais_geograficos = ["Banco", "Aeroporto", "Porto", "Livraria", "Mercado Central", "Museu", "Agência de Turismo"]
 
 # ==========================================
-# 2. SISTEMA DE PROGRESSÃO E PATENTES
+# 3. SISTEMA DE PROGRESSÃO E PATENTES
 # ==========================================
 def calcular_dificuldade(casos):
     if casos == 0:
@@ -327,10 +334,11 @@ def sortear_locais():
     st.session_state.locais_cidade = random.sample(locais_fisicos, 1) + random.sample(locais_geograficos, 2)
     random.shuffle(st.session_state.locais_cidade)
 
+def mudar_tela(nova_tela):
+    st.session_state.tela_atual = nova_tela
+
 def iniciar_nova_partida(venceu_anterior=False):
-    if 'casos_resolvidos' not in st.session_state:
-        st.session_state.casos_resolvidos = 0
-    elif venceu_anterior:
+    if venceu_anterior:
         st.session_state.casos_resolvidos += 1
 
     # Zera as seleções do computador da Interpol
@@ -366,181 +374,249 @@ def iniciar_nova_partida(venceu_anterior=False):
     st.session_state.jogo_acabou = False
     st.session_state.mensagem_tela = ""
     st.session_state.venceu_atual = False
+    st.session_state.artefato_roubado = random.choice(banco_artefatos)
     sortear_locais()
+    mudar_tela("briefing")
 
-# Inicia o jogo na primeira vez que a página carrega
+# ==========================================
+# 4. SETUP INICIAL DAS VARIÁVEIS DE SESSÃO
+# ==========================================
+if 'casos_resolvidos' not in st.session_state:
+    st.session_state.casos_resolvidos = 0
+if 'tela_atual' not in st.session_state:
+    st.session_state.tela_atual = "inicio"
+if 'nome_jogador' not in st.session_state:
+    st.session_state.nome_jogador = ""
+if 'artefato_roubado' not in st.session_state:
+    st.session_state.artefato_roubado = ""
 if 'horas_restantes' not in st.session_state:
     iniciar_nova_partida()
+    # Força a tela para 'inicio' no primeiro carregamento
+    st.session_state.tela_atual = "inicio"
+
+# TRAVA CONTRA O CACHE DO NAVEGADOR
+if st.session_state.nome_jogador == "":
+    st.session_state.tela_atual = "inicio"
 
 # ==========================================
-# 3. INTERFACE STREAMLIT
+# 5. GERENCIADOR DE TELAS
 # ==========================================
-st.set_page_config(page_title="DIE - Investigações", page_icon="🕵️", layout="wide")
 
-# Banner de Título
-try:
-    imagem_original = Image.open("banner.jpg")
-    imagem_achatada = imagem_original.resize((1200, 400))
-    st.image(imagem_achatada)
-except:
-    st.warning("Banner não encontrado.")
-
-# Cabeçalho Superior
-col_header1, col_header2 = st.columns([3, 1])
-with col_header1:
-    st.markdown("### Painel Operacional Ativo")
-with col_header2:
-    st.metric(label="Casos Resolvidos", value=st.session_state.casos_resolvidos)
-    st.caption(f"Patente: **{st.session_state.patente.upper()}**")
-
-st.divider()
-
-# Fim de Jogo por Tempo
-if st.session_state.horas_restantes <= 0 and not st.session_state.jogo_acabou:
-    st.session_state.mensagem_tela = f"⏰ O TEMPO ACABOU! O vilão escapou. O culpado era: {st.session_state.vilao['nome']}."
-    st.session_state.jogo_acabou = True
-    st.session_state.venceu_atual = False
-
-# --- BARRA LATERAL: INTERPOL ---
-st.sidebar.header("💻 Computador da Interpol")
-st.sidebar.write("Cruze os dados para emitir o mandado. Custa 1h.")
-
-# Passando o parâmetro key para forçar o reset ao iniciar nova partida
-p_sex = st.sidebar.selectbox("Sexo", ["---", "F", "M"], key="interpol_sexo")
-p_cab = st.sidebar.selectbox("Cabelo", ["---", "Castanho", "Preto", "Loiro", "Ruivo", "Branco"], key="interpol_cabelo")
-p_olh = st.sidebar.selectbox("Cor dos Olhos", ["---", "Castanho", "Amarelo", "Vermelho", "Azul"], key="interpol_olho")
-p_det = st.sidebar.selectbox("Detalhe", ["---", "Jóia", "Tatuagem", "Cicatriz", "Tapa olho"], key="interpol_detalhe")
-
-if st.sidebar.button("🚨 Emitir Mandado", disabled=st.session_state.jogo_acabou):
-    st.session_state.horas_restantes -= 1
-    
-    sexo_filtro = p_sex if p_sex != "---" else None
-    cabelo_filtro = p_cab if p_cab != "---" else None
-    olho_filtro = p_olh if p_olh != "---" else None
-    detalhe_filtro = p_det if p_det != "---" else None
-
-    filtrados = [s for s in banco_suspeitos if 
-                 (sexo_filtro is None or s["sexo"] == sexo_filtro) and
-                 (cabelo_filtro is None or s["cabelo"] == cabelo_filtro) and
-                 (olho_filtro is None or s["olho"] == olho_filtro) and
-                 (detalhe_filtro is None or s["detalhes"] == detalhe_filtro)]
-    
-    if len(filtrados) == 1:
-        st.session_state.mandado_ativo = filtrados[0]["nome"]
-        st.sidebar.success(f"🚨 MANDADO EMITIDO: {filtrados[0]['nome'].upper()}")
-        st.sidebar.image(filtrados[0]["imagem"], caption=f"FOTO ARQUIVO: {filtrados[0]['nome']}")
-    else:
-        st.session_state.mandado_ativo = None
-        st.sidebar.warning(f"Inconclusivo. {len(filtrados)} suspeitos na lista.")
-        for s in filtrados:
-            st.sidebar.caption(f"- {s['nome']}")
-
-# --- TELA PRINCIPAL ---
-st.subheader(f"📍 Local Atual: {st.session_state.local_atual.upper()}")
-
-url_imagem_cidade = mapa_mundi[st.session_state.local_atual]["imagem"]
-try:
-    st.image(url_imagem_cidade, use_container_width=True)
-except:
-    st.warning(f"Imagem da cidade não encontrada: {url_imagem_cidade}")
-
-st.progress(max(0, st.session_state.horas_restantes) / 120) 
-st.write(f"⏳ Horas Restantes: **{st.session_state.horas_restantes}h**")
-
-if st.session_state.mensagem_tela:
-    st.info(st.session_state.mensagem_tela)
-
-# Se o jogo ainda está rolando
-if not st.session_state.jogo_acabou:
-    col_inv, col_via = st.columns(2)
-    
-    # INVESTIGAR
-    with col_inv:
-        st.markdown("### 🔍 Investigar (2h)")
-        for local in st.session_state.locais_cidade:
-            if st.button(f"🏢 Ir para: {local}"):
-                st.session_state.horas_restantes -= 2
-                
-                if st.session_state.local_atual in st.session_state.rota_fuga:
-                    indice = st.session_state.rota_fuga.index(st.session_state.local_atual)
-                    
-                    if indice == len(st.session_state.rota_fuga) - 1:
-                        st.session_state.mensagem_tela = f"🕵️ Você invadiu o(a) {local} e achou o esconderijo do vilão!"
-                        st.session_state.jogo_acabou = True
-                        
-                        if st.session_state.mandado_ativo == st.session_state.vilao["nome"]:
-                            st.session_state.mensagem_tela += f"\n🎉 PARABÉNS! Você prendeu {st.session_state.vilao['nome']} com sucesso!"
-                            st.session_state.venceu_atual = True
-                            st.balloons()
-                        else:
-                            st.session_state.mensagem_tela += "\n❌ O vilão escapou! A polícia não tinha um mandado de prisão válido no nome dele."
-                            st.session_state.venceu_atual = False
-                            
-                        st.rerun()
-                    else:
-                        proximo_destino = st.session_state.rota_fuga[indice + 1]
-                        
-                        if local in locais_fisicos: 
-                            dicas_fisicas = [
-                                f"Notei que era uma pessoa do sexo {st.session_state.vilao['sexo']}.",
-                                f"A pessoa tinha cabelo {st.session_state.vilao['cabelo']}.",
-                                f"Reparei que a pessoa tinha olhos de cor {st.session_state.vilao['olho']}."
-                            ]
-                            if st.session_state.vilao["detalhes"] == "---":
-                                dicas_fisicas.append("Não notei nenhuma joia, tatuagem, cicatriz ou tapa olho.")
-                            else:
-                                dicas_fisicas.append(f"Me chamou a atenção que a pessoa tinha um(a) {st.session_state.vilao['detalhes']}.")
-                                
-                            dica = random.choice(dicas_fisicas)
-                        else: 
-                            dica = random.choice(mapa_mundi[proximo_destino]["fatos"])
-                            
-                        st.session_state.mensagem_tela = f"Testemunha no(a) {local}: '{dica}'"
-                else:
-                    st.session_state.mensagem_tela = f"Testemunha no(a) {local}: 'Não vi ninguém suspeito por aqui.'"
-                st.rerun()
-
-    # VIAJAR
-    with col_via:
-        st.markdown("### ✈️ Viajar (8h)")
-        destinos = mapa_mundi[st.session_state.local_atual]["conexoes"]
+# ----------------- TELA: INÍCIO -----------------
+if st.session_state.tela_atual == "inicio":
+    try:
+        imagem_original = Image.open("banner.jpg")
+        imagem_achatada = imagem_original.resize((1200, 400))
+        st.image(imagem_achatada)
+    except:
+        st.warning("Banner não encontrado.")
         
-        for dest in destinos:
-            if st.button(f"🛫 Voo para {dest}"):
-                st.session_state.local_atual = dest
-                st.session_state.horas_restantes -= 8
-                st.session_state.mensagem_tela = f"Você viajou para {dest}."
-                sortear_locais() 
+    st.markdown("<h1 style='text-align: center;'>Bem-vindo à DIE</h1>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: gray;'>Divisão de Investigações Especiais</h4>", unsafe_allow_html=True)
+    st.write("---")
+    
+    col1, col2, col3 = st.columns([1,2,1])
+    with col2:
+        st.info("Para acessar o painel confidencial, identifique-se.")
+        nome_digitado = st.text_input("Qual o seu nome, detetive?")
+        
+        if st.button("Identificar-se e Entrar", use_container_width=True):
+            if nome_digitado.strip() == "":
+                st.error("Você precisa digitar um nome!")
+            else:
+                st.session_state.nome_jogador = nome_digitado.title()
+                # Zera os casos para garantir jogo limpo
+                st.session_state.casos_resolvidos = 0
+                iniciar_nova_partida() # Cria a primeira missão de fato
                 st.rerun()
 
-    # ABANDONAR O CASO
+# ----------------- TELA: BRIEFING -----------------
+elif st.session_state.tela_atual == "briefing":
+    st.title("📁 Arquivo Confidencial - Novo Caso")
+    st.write("---")
+    
+    col_texto, col_dados = st.columns([2, 1])
+    
+    with col_texto:
+        st.markdown(f"### Olá, {st.session_state.nome_jogador}!")
+        st.write(f"Vejo no sistema que sua patente atual é **{st.session_state.patente.upper()}**.")
+        st.write("Temos uma emergência e precisamos das suas habilidades imediatas.")
+        
+        st.warning(f"**ALERTA DE ROUBO:**\nOcorreu um crime na cidade de **{st.session_state.local_atual.upper()}**. Suspeitamos que agentes da V.I.L.E roubaram **{st.session_state.artefato_roubado}** nas últimas horas.")
+        st.write("O suspeito já iniciou a rota de fuga ao redor do mundo e você tem tempo limitado para interceptá-lo.")
+        st.write("Você está pronto para liderar esta investigação?")
+        
+        col_b1, col_b2 = st.columns(2)
+        with col_b1:
+            st.button("✅ Aceitar o Caso", on_click=mudar_tela, args=("jogo",), use_container_width=True)
+        with col_b2:
+            st.button("❌ Recusar e Sair", on_click=mudar_tela, args=("inicio",), use_container_width=True)
+            
+    with col_dados:
+        st.metric(label="Casos Solucionados", value=st.session_state.casos_resolvidos)
+        st.metric(label="Prazo Estipulado", value=f"{st.session_state.horas_restantes}h")
+
+# ----------------- TELA: JOGO -----------------
+elif st.session_state.tela_atual == "jogo":
+    try:
+        imagem_original = Image.open("banner.jpg")
+        imagem_achatada = imagem_original.resize((1200, 400))
+        st.image(imagem_achatada)
+    except:
+        st.warning("Banner não encontrado.")
+
+    # Cabeçalho Superior
+    col_header1, col_header2 = st.columns([3, 1])
+    with col_header1:
+        st.markdown(f"### Detetive: {st.session_state.nome_jogador} | Operação Ativa")
+    with col_header2:
+        st.metric(label="Casos Resolvidos", value=st.session_state.casos_resolvidos)
+        st.caption(f"Patente: **{st.session_state.patente.upper()}**")
+
     st.divider()
-    if st.button("🚪 Abandonar o Caso (Entregar Distintivo)"):
+
+    # Fim de Jogo por Tempo
+    if st.session_state.horas_restantes <= 0 and not st.session_state.jogo_acabou:
+        st.session_state.mensagem_tela = f"⏰ O TEMPO ACABOU! O vilão escapou. O culpado era: {st.session_state.vilao['nome']}."
         st.session_state.jogo_acabou = True
         st.session_state.venceu_atual = False
-        st.session_state.mensagem_tela = f"Você entregou seu distintivo e abandonou a investigação. O culpado era: {st.session_state.vilao['nome']}."
-        st.rerun()
 
-# ==========================================
-# TELA FINAL (MUDANÇA DE IMAGEM)
-# ==========================================
-else:
-    st.divider()
-    
-    if st.session_state.venceu_atual:
-        imagem_final = st.session_state.vilao.get("imagem_preso", st.session_state.vilao["imagem"])
-        try:
-            st.image(imagem_final, width=250, caption=f"VILÃO CAPTURADO: {st.session_state.vilao['nome'].upper()}")
-        except:
-            st.warning(f"Imagem não encontrada: {imagem_final}")
-        st.success("Você solucionou o caso! O seu registro foi atualizado.")
-    else:
-        imagem_final = st.session_state.vilao.get("imagem_fuga", st.session_state.vilao["imagem"])
-        try:
-            st.image(imagem_final, width=250, caption=f"VILÃO FORAGIDO: {st.session_state.vilao['nome'].upper()}")
-        except:
-            st.warning(f"Imagem não encontrada: {imagem_final}")
-        st.error("Caso encerrado sem sucesso. O seu registro permanecerá o mesmo.")
+    # --- BARRA LATERAL: INTERPOL ---
+    st.sidebar.header("💻 Computador da Interpol")
+    st.sidebar.write("Cruze os dados para emitir o mandado. Custa 1h.")
+
+    p_sex = st.sidebar.selectbox("Sexo", ["---", "F", "M"], key="interpol_sexo")
+    p_cab = st.sidebar.selectbox("Cabelo", ["---", "Castanho", "Preto", "Loiro", "Ruivo", "Branco"], key="interpol_cabelo")
+    p_olh = st.sidebar.selectbox("Cor dos Olhos", ["---", "Castanho", "Amarelo", "Vermelho", "Azul"], key="interpol_olho")
+    p_det = st.sidebar.selectbox("Detalhe", ["---", "Jóia", "Tatuagem", "Cicatriz", "Tapa olho"], key="interpol_detalhe")
+
+    if st.sidebar.button("🚨 Emitir Mandado", disabled=st.session_state.jogo_acabou):
+        st.session_state.horas_restantes -= 1
         
-    # === AQUI ESTÁ A CORREÇÃO ===
-    st.button("🚔 Solicitar Novo Caso à DIE", on_click=iniciar_nova_partida, kwargs={"venceu_anterior": st.session_state.venceu_atual})
+        sexo_filtro = p_sex if p_sex != "---" else None
+        cabelo_filtro = p_cab if p_cab != "---" else None
+        olho_filtro = p_olh if p_olh != "---" else None
+        detalhe_filtro = p_det if p_det != "---" else None
+
+        filtrados = [s for s in banco_suspeitos if 
+                     (sexo_filtro is None or s["sexo"] == sexo_filtro) and
+                     (cabelo_filtro is None or s["cabelo"] == cabelo_filtro) and
+                     (olho_filtro is None or s["olho"] == olho_filtro) and
+                     (detalhe_filtro is None or s["detalhes"] == detalhe_filtro)]
+        
+        if len(filtrados) == 1:
+            st.session_state.mandado_ativo = filtrados[0]["nome"]
+            st.sidebar.success(f"🚨 MANDADO EMITIDO: {filtrados[0]['nome'].upper()}")
+            st.sidebar.image(filtrados[0]["imagem"], caption=f"FOTO ARQUIVO: {filtrados[0]['nome']}")
+        else:
+            st.session_state.mandado_ativo = None
+            st.sidebar.warning(f"Inconclusivo. {len(filtrados)} suspeitos na lista.")
+            for s in filtrados:
+                st.sidebar.caption(f"- {s['nome']}")
+
+    # --- TELA PRINCIPAL ---
+    st.subheader(f"📍 Local Atual: {st.session_state.local_atual.upper()}")
+
+    url_imagem_cidade = mapa_mundi[st.session_state.local_atual]["imagem"]
+    try:
+        st.image(url_imagem_cidade, use_container_width=True)
+    except:
+        st.warning(f"Imagem da cidade não encontrada: {url_imagem_cidade}")
+
+    st.progress(max(0, st.session_state.horas_restantes) / 120) 
+    st.write(f"⏳ Horas Restantes: **{st.session_state.horas_restantes}h**")
+
+    if st.session_state.mensagem_tela:
+        st.info(st.session_state.mensagem_tela)
+
+    if not st.session_state.jogo_acabou:
+        col_inv, col_via = st.columns(2)
+        
+        # INVESTIGAR
+        with col_inv:
+            st.markdown("### 🔍 Investigar (2h)")
+            for local in st.session_state.locais_cidade:
+                if st.button(f"🏢 Ir para: {local}"):
+                    st.session_state.horas_restantes -= 2
+                    
+                    if st.session_state.local_atual in st.session_state.rota_fuga:
+                        indice = st.session_state.rota_fuga.index(st.session_state.local_atual)
+                        
+                        if indice == len(st.session_state.rota_fuga) - 1:
+                            st.session_state.mensagem_tela = f"🕵️ Você invadiu o(a) {local} e achou o esconderijo do vilão!"
+                            st.session_state.jogo_acabou = True
+                            
+                            if st.session_state.mandado_ativo == st.session_state.vilao["nome"]:
+                                st.session_state.mensagem_tela += f"\n🎉 PARABÉNS! Você recuperou {st.session_state.artefato_roubado} e prendeu {st.session_state.vilao['nome']} com sucesso!"
+                                st.session_state.venceu_atual = True
+                                st.balloons()
+                            else:
+                                st.session_state.mensagem_tela += "\n❌ O vilão escapou! A polícia não tinha um mandado de prisão válido no nome dele."
+                                st.session_state.venceu_atual = False
+                                
+                            st.rerun()
+                        else:
+                            proximo_destino = st.session_state.rota_fuga[indice + 1]
+                            
+                            if local in locais_fisicos: 
+                                dicas_fisicas = [
+                                    f"Notei que era uma pessoa do sexo {st.session_state.vilao['sexo']}.",
+                                    f"A pessoa tinha cabelo {st.session_state.vilao['cabelo']}.",
+                                    f"Reparei que a pessoa tinha olhos de cor {st.session_state.vilao['olho']}."
+                                ]
+                                if st.session_state.vilao["detalhes"] == "---":
+                                    dicas_fisicas.append("Não notei nenhuma joia, tatuagem, cicatriz ou tapa olho.")
+                                else:
+                                    dicas_fisicas.append(f"Me chamou a atenção que a pessoa tinha um(a) {st.session_state.vilao['detalhes']}.")
+                                    
+                                dica = random.choice(dicas_fisicas)
+                            else: 
+                                dica = random.choice(mapa_mundi[proximo_destino]["fatos"])
+                                
+                            st.session_state.mensagem_tela = f"Testemunha no(a) {local}: '{dica}'"
+                    else:
+                        st.session_state.mensagem_tela = f"Testemunha no(a) {local}: 'Não vi ninguém suspeito por aqui.'"
+                    st.rerun()
+
+        # VIAJAR
+        with col_via:
+            st.markdown("### ✈️ Viajar (8h)")
+            destinos = mapa_mundi[st.session_state.local_atual]["conexoes"]
+            
+            for dest in destinos:
+                if st.button(f"🛫 Voo para {dest}"):
+                    st.session_state.local_atual = dest
+                    st.session_state.horas_restantes -= 8
+                    st.session_state.mensagem_tela = f"Você viajou para {dest}."
+                    sortear_locais() 
+                    st.rerun()
+
+        # ABANDONAR O CASO
+        st.divider()
+        if st.button("🚪 Abandonar o Caso (Entregar Distintivo)"):
+            st.session_state.jogo_acabou = True
+            st.session_state.venceu_atual = False
+            st.session_state.nome_jogador = "" # Remove o nome para forçar a volta pro Início
+            st.session_state.mensagem_tela = f"Você entregou seu distintivo e abandonou a investigação. O culpado era: {st.session_state.vilao['nome']}."
+            st.rerun()
+
+    # TELA FINAL DA MISSÃO
+    else:
+        st.divider()
+        
+        if st.session_state.venceu_atual:
+            imagem_final = st.session_state.vilao.get("imagem_preso", st.session_state.vilao["imagem"])
+            try:
+                st.image(imagem_final, width=250, caption=f"VILÃO CAPTURADO: {st.session_state.vilao['nome'].upper()}")
+            except:
+                st.warning(f"Imagem não encontrada: {imagem_final}")
+            st.success("Você solucionou o caso e o artefato foi devolvido! O seu registro foi atualizado.")
+        else:
+            imagem_final = st.session_state.vilao.get("imagem_fuga", st.session_state.vilao["imagem"])
+            try:
+                st.image(imagem_final, width=250, caption=f"VILÃO FORAGIDO: {st.session_state.vilao['nome'].upper()}")
+            except:
+                st.warning(f"Imagem não encontrada: {imagem_final}")
+            st.error("Caso encerrado sem sucesso. O artefato foi perdido para sempre.")
+            
+        st.button("🚔 Solicitar Novo Caso à DIE", on_click=iniciar_nova_partida, kwargs={"venceu_anterior": st.session_state.venceu_atual})
