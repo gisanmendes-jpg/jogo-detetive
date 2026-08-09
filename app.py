@@ -5,37 +5,38 @@ import random
 if 'casos_resolvidos' not in st.session_state:
     st.session_state.casos_resolvidos = 0
 
-
 # ==========================================
-# 1. BANCOS DE DADOS
+# 1. BANCOS DE DADOS (COM IMAGENS)
 # ==========================================
 banco_capangas = [
-    {"nome": "Gabi Aura Monster", "sexo": "F", "cabelo": "Castanho", "olho" : "Cas  tanho", "detalhes": "Jóia"},
-    {"nome": "Denji",  "sexo": "M", "cabelo": "Loiro", "olho" : "Castanho", "detalhes": "Tapa olho"},
-    {"nome": "Nana",  "sexo": "F", "cabelo": "Ruivo", "olho" : "Amarelo", "detalhes": "Jóia"},
-    {"nome": "Gisa Estrela",  "sexo": "F", "cabelo": "Castanho", "olho" : "Castanho", "detalhes": "Tatuagem"},
-    {"nome": "Scarlet",  "sexo": "F", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Cicatriz"},
-    {"nome": "Ryan",  "sexo": "M", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Jóia"},
-    {"nome": "Mayah",  "sexo": "F", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Tapa olho"},
-    {"nome": "Elsa",  "sexo": "F", "cabelo": "Preto", "olho" : "Azul", "detalhes": "Jóia"},
-    {"nome": "Douma",  "sexo": "M", "cabelo": "Loiro", "olho" : "Amarelo", "detalhes": "Tatuagem"},
-    {"nome": "Haru",  "sexo": "M", "cabelo": "Branco", "olho" : "Amarelo", "detalhes": "Tapa olho"},
-    {"nome": "Roger",  "sexo": "M", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Tatuagem"},
-    {"nome": "Clara",  "sexo": "F", "cabelo": "Preto", "olho" : "Azul", "detalhes": "Tatuagem"},
-    {"nome": "Loira Burrinha",  "sexo": "F", "cabelo": "Loiro", "olho" : "Azul", "detalhes": "Jóia"},
-    {"nome": "Victor",  "sexo": "M", "cabelo": "Branco", "olho" : "Castanho", "detalhes": "Cicatriz"}
+    {"nome": "Gabi Aura Monster", "sexo": "F", "cabelo": "Castanho", "olho" : "Castanho", "detalhes": "Jóia", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Gabi+Aura"},
+    {"nome": "Denji",  "sexo": "M", "cabelo": "Loiro", "olho" : "Castanho", "detalhes": "Tapa olho", "imagem": "https://placehold.co/300x400/FF8C00/FFFFFF?text=Denji"},
+    {"nome": "Nana",  "sexo": "F", "cabelo": "Ruivo", "olho" : "Amarelo", "detalhes": "Jóia", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Nana"},
+    {"nome": "Gisa Estrela",  "sexo": "F", "cabelo": "Castanho", "olho" : "Castanho", "detalhes": "Tatuagem", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Gisa"},
+    {"nome": "Scarlet",  "sexo": "F", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Cicatriz", "imagem": "https://placehold.co/300x400/8B0000/FFFFFF?text=Scarlet"},
+    {"nome": "Ryan",  "sexo": "M", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Jóia", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Ryan"},
+    {"nome": "Mayah",  "sexo": "F", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Tapa olho", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Mayah"},
+    {"nome": "Elsa",  "sexo": "F", "cabelo": "Preto", "olho" : "Azul", "detalhes": "Jóia", "imagem": "https://placehold.co/300x400/87CEFA/FFFFFF?text=Elsa"},
+    {"nome": "Douma",  "sexo": "M", "cabelo": "Loiro", "olho" : "Amarelo", "detalhes": "Tatuagem", "imagem": "https://placehold.co/300x400/BDB76B/FFFFFF?text=Douma"},
+    {"nome": "Haru",  "sexo": "M", "cabelo": "Branco", "olho" : "Amarelo", "detalhes": "Tapa olho", "imagem": "https://placehold.co/300x400/CCCCCC/000000?text=Haru"},
+    {"nome": "Roger",  "sexo": "M", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Tatuagem", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Roger"},
+    {"nome": "Clara",  "sexo": "F", "cabelo": "Preto", "olho" : "Azul", "detalhes": "Cicatriz", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Clara"},
+    {"nome": "Loira Burrinha",  "sexo": "F", "cabelo": "Loiro", "olho" : "Azul", "detalhes": "Jóia", "imagem": "https://placehold.co/300x400/FFD700/000000?text=Loira"},
+    {"nome": "Victor",  "sexo": "M", "cabelo": "Branco", "olho" : "Castanho", "detalhes": "Cicatriz", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Victor"}
 ]
 
 banco_chefes = [
-    {"nome": "Makima",  "sexo": "F", "cabelo": "Ruivo", "olho" : "Amarelo", "detalhes": "Tatuagem"},
-    {"nome": "Muzan",  "sexo": "M", "cabelo": "Branco", "olho" : "Vermelho", "detalhes": "Cicatriz"}
+    {"nome": "Makima",  "sexo": "F", "cabelo": "Ruivo", "olho" : "Amarelo", "detalhes": "Tatuagem", "imagem": "https://placehold.co/300x400/DC143C/FFFFFF?text=Makima"},
+    {"nome": "Muzan",  "sexo": "M", "cabelo": "Branco", "olho" : "Vermelho", "detalhes": "Cicatriz", "imagem": "https://placehold.co/300x400/1A1A1A/FFFFFF?text=Muzan"}
 ]
+
 banco_suspeitos = banco_capangas + banco_chefes
 
 mapa_mundi = {
     # ================= AMÉRICAS =================
     "Rio de Janeiro": {
         "conexoes": ["Lima", "Nova York", "Tóquio", "Buenos Aires", "Cidade do Cabo"],
+        "imagem": "https://placehold.co/800x300/2E8B57/FFFFFF?text=Rio+de+Janeiro",
         "fatos": [
             "O suspeito queria ver o Cristo Redentor.",
             "Trocou dinheiro por Reais.",
@@ -51,6 +52,7 @@ mapa_mundi = {
     },
     "Lima": {
         "conexoes": ["Rio de Janeiro", "Nova York", "Cidade do México", "Buenos Aires", "Sydney"],
+        "imagem": "https://placehold.co/800x300/8B4513/FFFFFF?text=Lima",
         "fatos": [
             "Queria conhecer o estádio Monumental onde o Flamengo foi campeão.",
             "Perguntou sobre as ruínas de Machu Picchu.",
@@ -63,6 +65,7 @@ mapa_mundi = {
     },
     "Nova York": {
         "conexoes": ["Rio de Janeiro", "Lima", "Paris", "Cidade do México", "Toronto", "Londres", "Los Angeles"],
+        "imagem": "https://placehold.co/800x300/4682B4/FFFFFF?text=Nova+York",
         "fatos": [
             "Perguntou onde ficava a balsa para a Estátua da Liberdade.",
             "Tinha um mapa detalhado da ilha de Manhattan.",
@@ -75,6 +78,7 @@ mapa_mundi = {
     },
     "Cidade do México": {
         "conexoes": ["Lima", "Londres", "Nova York", "Toronto", "Buenos Aires", "Los Angeles"],
+        "imagem": "https://placehold.co/800x300/006400/FFFFFF?text=Cidade+do+Mexico",
         "fatos": [
             "Comeu muitos tacos com pimenta e guacamole.",
             "Comprou um sombreiro gigante em uma feira de rua.",
@@ -87,6 +91,7 @@ mapa_mundi = {
     },
     "Buenos Aires": {
         "conexoes": ["Rio de Janeiro", "Lima", "Cidade do México"],
+        "imagem": "https://placehold.co/800x300/4169E1/FFFFFF?text=Buenos+Aires",
         "fatos": [
             "Foi visto comendo um alfajor de doce de leite.",
             "Perguntou onde poderia assistir a um show de Tango.",
@@ -99,6 +104,7 @@ mapa_mundi = {
     },
     "Toronto": {
         "conexoes": ["Nova York", "Cidade do México"],
+        "imagem": "https://placehold.co/800x300/B22222/FFFFFF?text=Toronto",
         "fatos": [
             "Reclamou do frio e comprou um casaco muito pesado.",
             "Tinha um broche com uma folha de bordo (maple) vermelha.",
@@ -111,6 +117,7 @@ mapa_mundi = {
     },
     "Los Angeles": {
         "conexoes": ["Nova York", "Cidade do México", "Sydney", "Tóquio"],
+        "imagem": "https://placehold.co/800x300/FF8C00/FFFFFF?text=Los+Angeles",
         "fatos": [
             "Estava procurando o letreiro gigante de Hollywood nas colinas.",
             "Perguntou onde ficava a Calçada da Fama.",
@@ -125,6 +132,7 @@ mapa_mundi = {
     # ================= EUROPA =================
     "Paris": {
         "conexoes": ["Nova York", "Londres", "Roma", "Berlim"],
+        "imagem": "https://placehold.co/800x300/778899/FFFFFF?text=Paris",
         "fatos": [
             "Disse que faria um piquenique aos pés da Torre Eiffel.",
             "Tinha um broche com uma bandeira listrada em azul, branco e vermelho.",
@@ -137,6 +145,7 @@ mapa_mundi = {
     },
     "Londres": {
         "conexoes": ["Paris", "Cidade do México", "Nova York", "Berlim", "Roma", "Nova Délhi", "Dubai"],
+        "imagem": "https://placehold.co/800x300/696969/FFFFFF?text=Londres",
         "fatos": [
             "Estava tomando chá preto pontualmente às 17h.",
             "Queria ajustar o relógio para bater com o horário do Big Ben.",
@@ -149,6 +158,7 @@ mapa_mundi = {
     },
     "Roma": {
         "conexoes": ["Paris", "Londres", "Cairo", "Berlim"],
+        "imagem": "https://placehold.co/800x300/DAA520/FFFFFF?text=Roma",
         "fatos": [
             "Perguntou como chegar às ruínas do Coliseu.",
             "Foi visto jogando uma moeda na Fonte de Trevi.",
@@ -161,6 +171,7 @@ mapa_mundi = {
     },
     "Berlim": {
         "conexoes": ["Paris", "Londres", "Roma", "Moscou"],
+        "imagem": "https://placehold.co/800x300/2F4F4F/FFFFFF?text=Berlim",
         "fatos": [
             "Perguntou onde ficavam os restos do famoso muro que dividiu a cidade.",
             "Foi tirar uma foto no Portão de Brandemburgo.",
@@ -173,6 +184,7 @@ mapa_mundi = {
     },
     "Moscou": {
         "conexoes": ["Tóquio", "Berlim", "Pequim"],
+        "imagem": "https://placehold.co/800x300/8B0000/FFFFFF?text=Moscou",
         "fatos": [
             "Comprou um conjunto de bonecas Matrioscas.",
             "Queria passear pela famosa Praça Vermelha.",
@@ -187,6 +199,7 @@ mapa_mundi = {
     # ================= ÁSIA, ÁFRICA E OCEANIA =================
     "Tóquio": {
         "conexoes": ["Rio de Janeiro", "Moscou", "Pequim", "Sydney", "Los Angeles"],
+        "imagem": "https://placehold.co/800x300/FF69B4/FFFFFF?text=Toquio",
         "fatos": [
             "Estava estudando o alfabeto japonês.",
             "Mencionou que queria escalar o Monte Fuji.",
@@ -199,6 +212,7 @@ mapa_mundi = {
     },
     "Pequim": {
         "conexoes": ["Tóquio", "Sydney", "Moscou", "Nova Délhi", "Bangkok"],
+        "imagem": "https://placehold.co/800x300/DC143C/FFFFFF?text=Pequim",
         "fatos": [
             "Perguntou qual era o melhor trecho para visitar a Grande Muralha.",
             "Queria entrar no palácio imperial da Cidade Proibida.",
@@ -211,6 +225,7 @@ mapa_mundi = {
     },
     "Nova Délhi": {
         "conexoes": ["Londres", "Cairo", "Pequim", "Dubai", "Bangkok"],
+        "imagem": "https://placehold.co/800x300/D2691E/FFFFFF?text=Nova+Delhi",
         "fatos": [
             "Tinha um bilhete de trem para ver o Taj Mahal.",
             "Trocou o dinheiro por Rúpias.",
@@ -223,6 +238,7 @@ mapa_mundi = {
     },
     "Bangkok": {
         "conexoes": ["Pequim", "Nova Délhi", "Sydney"],
+        "imagem": "https://placehold.co/800x300/FFD700/000000?text=Bangkok",
         "fatos": [
             "Reclamou do forte calor tropical.",
             "Tinha um guia sobre templos budistas cheios de ouro.",
@@ -235,6 +251,7 @@ mapa_mundi = {
     },
     "Dubai": {
         "conexoes": ["Cairo", "Nova Délhi", "Londres"],
+        "imagem": "https://placehold.co/800x300/C0C0C0/000000?text=Dubai",
         "fatos": [
             "Perguntou se o elevador para o prédio mais alto do mundo demorava muito.",
             "Trocou seu dinheiro por Dirhams.",
@@ -247,6 +264,7 @@ mapa_mundi = {
     },
     "Cairo": {
         "conexoes": ["Roma", "Cidade do Cabo", "Nova Délhi", "Dubai"],
+        "imagem": "https://placehold.co/800x300/F4A460/FFFFFF?text=Cairo",
         "fatos": [
             "Queria fazer um passeio de camelo ao entardecer.",
             "Tinha um mapa detalhado das Grandes Pirâmides de Gizé.",
@@ -259,6 +277,7 @@ mapa_mundi = {
     },
     "Cidade do Cabo": {
         "conexoes": ["Rio de Janeiro", "Cairo"],
+        "imagem": "https://placehold.co/800x300/556B2F/FFFFFF?text=Cidade+do+Cabo",
         "fatos": [
             "Perguntou como subir a famosa Table Mountain (Montanha da Mesa).",
             "Agendou um safári para tentar ver leões e elefantes.",
@@ -271,6 +290,7 @@ mapa_mundi = {
     },
     "Sydney": {
         "conexoes": ["Tóquio", "Lima", "Pequim", "Los Angeles", "Bangkok"],
+        "imagem": "https://placehold.co/800x300/000080/FFFFFF?text=Sydney",
         "fatos": [
             "Queria ir a um santuário ver cangurus e coalas.",
             "Foi fotografar a famosa Casa de Ópera com formato de velas.",
@@ -291,17 +311,17 @@ locais_geograficos = ["Banco", "Aeroporto", "Porto", "Livraria", "Mercado Centra
 # ==========================================
 def calcular_dificuldade(casos):
     if casos == 0:
-        return "Recruta", 3, 120, False
+        return "Recruta", 4, 120, False
     elif casos == 1:
-        return "Detetive Júnior", 4, 115, False
+        return "Detetive Júnior", 5, 110, False
     elif casos == 2:
-        return "Detetive Particular", 5, 110, False
+        return "Detetive Particular", 6, 100, False
     elif casos == 3:
-        return "Investigador", 6, 105, False
+        return "Investigador", 7, 90, False
     elif casos == 4:
-        return "Detetive de Elite", 7, 100, False
+        return "Detetive de Elite", 8, 80, False
     else:
-        return "Super Detetive", 8, 95, True
+        return "Super Detetive", 9, 80, True
 
 def sortear_locais():
     st.session_state.locais_cidade = random.sample(locais_fisicos, 1) + random.sample(locais_geograficos, 2)
@@ -373,7 +393,6 @@ st.sidebar.write("Cruze os dados para emitir o mandado. Custa 1h.")
 
 p_sex = st.sidebar.selectbox("Sexo", ["---", "F", "M"])
 p_cab = st.sidebar.selectbox("Cabelo", ["---", "Castanho", "Preto", "Loiro", "Ruivo", "Branco"])
-# Novo menu suspenso para a cor dos olhos
 p_olh = st.sidebar.selectbox("Cor dos Olhos", ["---", "Castanho", "Amarelo", "Vermelho", "Azul"])
 p_det = st.sidebar.selectbox("Detalhe", ["---", "Jóia", "Tatuagem", "Cicatriz", "Tapa olho"])
 
@@ -385,7 +404,6 @@ if st.sidebar.button("🚨 Emitir Mandado", disabled=st.session_state.jogo_acabo
     olho_filtro = p_olh if p_olh != "---" else None
     detalhe_filtro = p_det if p_det != "---" else None
 
-    # Lógica de filtro atualizada para checar a chave "olho"
     filtrados = [s for s in banco_suspeitos if 
                  (sexo_filtro is None or s["sexo"] == sexo_filtro) and
                  (cabelo_filtro is None or s["cabelo"] == cabelo_filtro) and
@@ -395,6 +413,9 @@ if st.sidebar.button("🚨 Emitir Mandado", disabled=st.session_state.jogo_acabo
     if len(filtrados) == 1:
         st.session_state.mandado_ativo = filtrados[0]["nome"]
         st.sidebar.success(f"🚨 MANDADO EMITIDO: {filtrados[0]['nome'].upper()}")
+        
+        # MOSTRA A FOTO DO SUSPEITO NA BARRA LATERAL!
+        st.sidebar.image(filtrados[0]["imagem"], caption=f"FOTO ARQUIVO: {filtrados[0]['nome']}")
     else:
         st.session_state.mandado_ativo = None
         st.sidebar.warning(f"Inconclusivo. {len(filtrados)} suspeitos na lista.")
@@ -403,6 +424,11 @@ if st.sidebar.button("🚨 Emitir Mandado", disabled=st.session_state.jogo_acabo
 
 # --- TELA PRINCIPAL ---
 st.subheader(f"📍 Local Atual: {st.session_state.local_atual.upper()}")
+
+# MOSTRA A IMAGEM DA CIDADE ATUAL
+url_imagem_cidade = mapa_mundi[st.session_state.local_atual]["imagem"]
+st.image(url_imagem_cidade, use_container_width=True)
+
 st.progress(max(0, st.session_state.horas_restantes) / 120) 
 st.write(f"⏳ Horas Restantes: **{st.session_state.horas_restantes}h**")
 
@@ -440,7 +466,6 @@ if not st.session_state.jogo_acabou:
                         proximo_destino = st.session_state.rota_fuga[indice + 1]
                         
                         if local in locais_fisicos: 
-                            # Atualizado para incluir dicas sobre a cor dos olhos
                             dicas_fisicas = [
                                 f"Notei que era uma pessoa do sexo {st.session_state.vilao['sexo']}.",
                                 f"A pessoa tinha cabelo {st.session_state.vilao['cabelo']}.",
@@ -484,6 +509,10 @@ if not st.session_state.jogo_acabou:
 # Se o jogo acabou (Exibe Tela de Resumo e Restart)
 else:
     st.divider()
+    
+    # MOSTRA A FOTO DO VILÃO NA TELA DE FIM DE JOGO
+    st.image(st.session_state.vilao["imagem"], width=250, caption=f"IDENTIDADE DO VILÃO: {st.session_state.vilao['nome'].upper()}")
+    
     if st.session_state.venceu_atual:
         st.success("Você solucionou o caso! O seu registro foi atualizado.")
     else:
