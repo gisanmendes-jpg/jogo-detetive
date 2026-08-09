@@ -377,7 +377,7 @@ st.set_page_config(page_title="DIE - Investigações", page_icon="🕵️", layo
 imagem_original = Image.open("banner.jpg")
 
 # 2. Você força o novo tamanho: (Largura, Altura) em pixels
-imagem_achatada = imagem_original.resize((1000, 250))
+imagem_achatada = imagem_original.resize((1200, 400))
 
 # 3. Manda o Streamlit exibir a nova imagem já alterada
 st.image(imagem_achatada)
