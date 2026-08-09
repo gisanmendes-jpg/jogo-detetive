@@ -9,7 +9,7 @@ if 'casos_resolvidos' not in st.session_state:
 # 1. BANCOS DE DADOS
 # ==========================================
 banco_capangas = [
-    {"nome": "Gabi Aura Monster", "sexo": "F", "cabelo": "Castanho", "olho" : "Castanho", "detalhes": "Jóia"},
+    {"nome": "Gabi Aura Monster", "sexo": "F", "cabelo": "Castanho", "olho" : "Cas  tanho", "detalhes": "Jóia"},
     {"nome": "Denji",  "sexo": "M", "cabelo": "Loiro", "olho" : "Castanho", "detalhes": "Tapa olho"},
     {"nome": "Nana",  "sexo": "F", "cabelo": "Ruivo", "olho" : "Amarelo", "detalhes": "Jóia"},
     {"nome": "Gisa Estrela",  "sexo": "F", "cabelo": "Castanho", "olho" : "Castanho", "detalhes": "Tatuagem"},
@@ -20,7 +20,7 @@ banco_capangas = [
     {"nome": "Douma",  "sexo": "M", "cabelo": "Loiro", "olho" : "Amarelo", "detalhes": "Tatuagem"},
     {"nome": "Haru",  "sexo": "M", "cabelo": "Branco", "olho" : "Amarelo", "detalhes": "Tapa olho"},
     {"nome": "Roger",  "sexo": "M", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Tatuagem"},
-    {"nome": "Clara",  "sexo": "F", "cabelo": "Preto", "olho" : "Azul", "detalhes": "Jóia"},
+    {"nome": "Clara",  "sexo": "F", "cabelo": "Preto", "olho" : "Azul", "detalhes": "Tatuagem"},
     {"nome": "Loira Burrinha",  "sexo": "F", "cabelo": "Loiro", "olho" : "Azul", "detalhes": "Jóia"},
     {"nome": "Victor",  "sexo": "M", "cabelo": "Branco", "olho" : "Castanho", "detalhes": "Cicatriz"}
 ]
@@ -29,7 +29,6 @@ banco_chefes = [
     {"nome": "Makima",  "sexo": "F", "cabelo": "Ruivo", "olho" : "Amarelo", "detalhes": "Tatuagem"},
     {"nome": "Muzan",  "sexo": "M", "cabelo": "Branco", "olho" : "Vermelho", "detalhes": "Cicatriz"}
 ]
-
 banco_suspeitos = banco_capangas + banco_chefes
 
 mapa_mundi = {
@@ -291,17 +290,17 @@ locais_geograficos = ["Banco", "Aeroporto", "Porto", "Livraria", "Mercado Centra
 # ==========================================
 def calcular_dificuldade(casos):
     if casos == 0:
-        return "Recruta", 4, 120, False
+        return "Recruta", 3, 120, False
     elif casos == 1:
-        return "Detetive Júnior", 5, 110, False
+        return "Detetive Júnior", 4, 115, False
     elif casos == 2:
-        return "Detetive Particular", 6, 100, False
+        return "Detetive Particular", 5, 110, False
     elif casos == 3:
-        return "Investigador", 7, 90, False
+        return "Investigador", 6, 105, False
     elif casos == 4:
-        return "Detetive de Elite", 8, 80, False
+        return "Detetive de Elite", 7, 100, False
     else:
-        return "Super Detetive", 9, 80, True
+        return "Super Detetive", 8, 95, True
 
 def sortear_locais():
     st.session_state.locais_cidade = random.sample(locais_fisicos, 1) + random.sample(locais_geograficos, 2)
