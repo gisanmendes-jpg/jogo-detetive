@@ -371,7 +371,8 @@ if 'horas_restantes' not in st.session_state:
 st.set_page_config(page_title="DIE - Investigações", page_icon="🕵️", layout="wide")
 
 # Banner de Título (Substitui o st.title)
-st.image("banner.jpg", use_container_width=True)
+# Substitua o número 600 pelo tamanho que achar melhor
+st.image("banner.jpg", width=600)
 
 # Cabeçalho Superior
 col_header1, col_header2 = st.columns([3, 1])
