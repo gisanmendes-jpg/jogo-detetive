@@ -1,5 +1,6 @@
 import streamlit as st
 import random
+from PIL import Image  # <-- É esta linha que resolve o seu erro!
 
 # Inicia a variável de carreira INDEPENDENTE do jogo estar rodando
 if 'casos_resolvidos' not in st.session_state:
