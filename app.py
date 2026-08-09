@@ -65,7 +65,7 @@ mapa_mundi = {
     },
     "Nova York": {
         "conexoes": ["Rio de Janeiro", "Lima", "Paris", "Cidade do México", "Toronto", "Londres", "Los Angeles"],
-        "imagem": "https://placehold.co/800x300/4682B4/FFFFFF?text=Nova+York",
+        "imagem": "ny.jpg",
         "fatos": [
             "Perguntou onde ficava a balsa para a Estátua da Liberdade.",
             "Tinha um mapa detalhado da ilha de Manhattan.",
