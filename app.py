@@ -369,12 +369,15 @@ if 'horas_restantes' not in st.session_state:
 # ==========================================
 # 3. INTERFACE STREAMLIT
 # ==========================================
-st.set_page_config(page_title="Agência ACME", page_icon="🕵️", layout="wide")
+st.set_page_config(page_title="DIE - Investigações", page_icon="🕵️", layout="wide")
+
+# Banner de Título (Substitui o st.title)
+st.image("https://placehold.co/1200x250/111111/FFD700?text=DIE+%E2%80%94+Divis%C3%A3o+de+Investiga%C3%A7%C3%B5es+Especiais", use_container_width=True)
 
 # Cabeçalho Superior
 col_header1, col_header2 = st.columns([3, 1])
 with col_header1:
-    st.title("🕵️ Agência ACME - Investigações")
+    st.markdown("### Painel Operacional Ativo")
 with col_header2:
     st.metric(label="Casos Resolvidos", value=st.session_state.casos_resolvidos)
     st.caption(f"Patente: **{st.session_state.patente.upper()}**")
@@ -413,8 +416,6 @@ if st.sidebar.button("🚨 Emitir Mandado", disabled=st.session_state.jogo_acabo
     if len(filtrados) == 1:
         st.session_state.mandado_ativo = filtrados[0]["nome"]
         st.sidebar.success(f"🚨 MANDADO EMITIDO: {filtrados[0]['nome'].upper()}")
-        
-        # MOSTRA A FOTO DO SUSPEITO NA BARRA LATERAL!
         st.sidebar.image(filtrados[0]["imagem"], caption=f"FOTO ARQUIVO: {filtrados[0]['nome']}")
     else:
         st.session_state.mandado_ativo = None
@@ -425,7 +426,6 @@ if st.sidebar.button("🚨 Emitir Mandado", disabled=st.session_state.jogo_acabo
 # --- TELA PRINCIPAL ---
 st.subheader(f"📍 Local Atual: {st.session_state.local_atual.upper()}")
 
-# MOSTRA A IMAGEM DA CIDADE ATUAL
 url_imagem_cidade = mapa_mundi[st.session_state.local_atual]["imagem"]
 st.image(url_imagem_cidade, use_container_width=True)
 
@@ -435,11 +435,11 @@ st.write(f"⏳ Horas Restantes: **{st.session_state.horas_restantes}h**")
 if st.session_state.mensagem_tela:
     st.info(st.session_state.mensagem_tela)
 
-# Se o jogo ainda está rolando (Exibe Botões de Ação)
+# Se o jogo ainda está rolando
 if not st.session_state.jogo_acabou:
     col_inv, col_via = st.columns(2)
     
-    # COLUNA 1: INVESTIGAR
+    # INVESTIGAR
     with col_inv:
         st.markdown("### 🔍 Investigar (2h)")
         for local in st.session_state.locais_cidade:
@@ -485,7 +485,7 @@ if not st.session_state.jogo_acabou:
                     st.session_state.mensagem_tela = f"Testemunha no(a) {local}: 'Não vi ninguém suspeito por aqui.'"
                 st.rerun()
 
-    # COLUNA 2: VIAJAR
+    # VIAJAR
     with col_via:
         st.markdown("### ✈️ Viajar (8h)")
         destinos = mapa_mundi[st.session_state.local_atual]["conexoes"]
@@ -498,7 +498,7 @@ if not st.session_state.jogo_acabou:
                 sortear_locais() 
                 st.rerun()
 
-    # BOTÃO DE ABANDONAR O CASO
+    # ABANDONAR O CASO
     st.divider()
     if st.button("🚪 Abandonar o Caso (Entregar Distintivo)"):
         st.session_state.jogo_acabou = True
@@ -506,11 +506,10 @@ if not st.session_state.jogo_acabou:
         st.session_state.mensagem_tela = f"Você entregou seu distintivo e abandonou a investigação. O culpado era: {st.session_state.vilao['nome']}."
         st.rerun()
 
-# Se o jogo acabou (Exibe Tela de Resumo e Restart)
+# Se o jogo acabou
 else:
     st.divider()
     
-    # MOSTRA A FOTO DO VILÃO NA TELA DE FIM DE JOGO
     st.image(st.session_state.vilao["imagem"], width=250, caption=f"IDENTIDADE DO VILÃO: {st.session_state.vilao['nome'].upper()}")
     
     if st.session_state.venceu_atual:
@@ -518,6 +517,6 @@ else:
     else:
         st.error("Caso encerrado sem sucesso. O seu registro permanecerá o mesmo.")
         
-    if st.button("🚔 Solicitar Novo Caso à Agência"):
+    if st.button("🚔 Solicitar Novo Caso à DIE"):
         iniciar_nova_partida(venceu_anterior=st.session_state.venceu_atual)
         st.rerun()
