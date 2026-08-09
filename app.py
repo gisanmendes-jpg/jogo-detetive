@@ -10,12 +10,10 @@ if 'casos_resolvidos' not in st.session_state:
 # 1. BANCOS DE DADOS (COM IMAGENS)
 # ==========================================
 banco_capangas = [
-    # Exemplo de como cadastrar as novas imagens (Triste/Feliz):
     {"nome": "Gabi Aura Monster", "sexo": "F", "cabelo": "Castanho", "olho" : "Castanho", "detalhes": "Jóia", "imagem": "gabi.png", "imagem_preso": "gabi_triste.png", "imagem_fuga": "gabi_feliz.png"},
     {"nome": "Denji",  "sexo": "M", "cabelo": "Loiro", "olho" : "Castanho", "detalhes": "Tapa olho", "imagem": "denji.jpg", "imagem_preso": "denji_triste.jpg", "imagem_fuga": "denji_feliz.jpg"},
-    
     {"nome": "Nana",  "sexo": "F", "cabelo": "Ruivo", "olho" : "Amarelo", "detalhes": "Jóia", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Nana"},
-    {"nome": "Gisa Estrela",  "sexo": "F", "cabelo": "Castanho", "olho" : "Castanho", "detalhes": "Tatuagem", "imagem": "gisa.png", "imagem_preso": "gisa_triste.png", "imagem_fuga": "gisa_feliz.png"},
+    {"nome": "Gisa Estrela",  "sexo": "F", "cabelo": "Castanho", "olho" : "Castanho", "detalhes": "Tatuagem", "imagem": "gisa.png"},
     {"nome": "Scarlet",  "sexo": "F", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Cicatriz", "imagem": "https://placehold.co/300x400/8B0000/FFFFFF?text=Scarlet"},
     {"nome": "Ryan",  "sexo": "M", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Jóia", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Ryan"},
     {"nome": "Mayah",  "sexo": "F", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Tapa olho", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Mayah"},
@@ -294,7 +292,7 @@ mapa_mundi = {
         "conexoes": ["Tóquio", "Lima", "Pequim", "Los Angeles", "Bangkok"],
         "imagem": "sy.jpg",
         "fatos": [
-            "Queria ir a santuário ver cangurus e coalas.",
+            "Queria ir a um santuário ver cangurus e coalas.",
             "Foi fotografar a famosa Casa de Ópera com formato de velas.",
             "Comprou uma prancha de surfe e foi para Bondi Beach.",
             "Disse que iria mergulhar na Grande Barreira de Corais.",
@@ -334,6 +332,12 @@ def iniciar_nova_partida(venceu_anterior=False):
         st.session_state.casos_resolvidos = 0
     elif venceu_anterior:
         st.session_state.casos_resolvidos += 1
+
+    # Zera as seleções do computador da Interpol
+    st.session_state.interpol_sexo = "---"
+    st.session_state.interpol_cabelo = "---"
+    st.session_state.interpol_olho = "---"
+    st.session_state.interpol_detalhe = "---"
 
     patente, tamanho_rota, horas_restantes, enfrenta_chefe = calcular_dificuldade(st.session_state.casos_resolvidos)
     
@@ -401,10 +405,11 @@ if st.session_state.horas_restantes <= 0 and not st.session_state.jogo_acabou:
 st.sidebar.header("💻 Computador da Interpol")
 st.sidebar.write("Cruze os dados para emitir o mandado. Custa 1h.")
 
-p_sex = st.sidebar.selectbox("Sexo", ["---", "F", "M"])
-p_cab = st.sidebar.selectbox("Cabelo", ["---", "Castanho", "Preto", "Loiro", "Ruivo", "Branco"])
-p_olh = st.sidebar.selectbox("Cor dos Olhos", ["---", "Castanho", "Amarelo", "Vermelho", "Azul"])
-p_det = st.sidebar.selectbox("Detalhe", ["---", "Jóia", "Tatuagem", "Cicatriz", "Tapa olho"])
+# Passando o parâmetro key para forçar o reset ao iniciar nova partida
+p_sex = st.sidebar.selectbox("Sexo", ["---", "F", "M"], key="interpol_sexo")
+p_cab = st.sidebar.selectbox("Cabelo", ["---", "Castanho", "Preto", "Loiro", "Ruivo", "Branco"], key="interpol_cabelo")
+p_olh = st.sidebar.selectbox("Cor dos Olhos", ["---", "Castanho", "Amarelo", "Vermelho", "Azul"], key="interpol_olho")
+p_det = st.sidebar.selectbox("Detalhe", ["---", "Jóia", "Tatuagem", "Cicatriz", "Tapa olho"], key="interpol_detalhe")
 
 if st.sidebar.button("🚨 Emitir Mandado", disabled=st.session_state.jogo_acabou):
     st.session_state.horas_restantes -= 1
@@ -434,7 +439,10 @@ if st.sidebar.button("🚨 Emitir Mandado", disabled=st.session_state.jogo_acabo
 st.subheader(f"📍 Local Atual: {st.session_state.local_atual.upper()}")
 
 url_imagem_cidade = mapa_mundi[st.session_state.local_atual]["imagem"]
-st.image(url_imagem_cidade, use_container_width=True)
+try:
+    st.image(url_imagem_cidade, use_container_width=True)
+except:
+    st.warning(f"Imagem da cidade não encontrada: {url_imagem_cidade}")
 
 st.progress(max(0, st.session_state.horas_restantes) / 120) 
 st.write(f"⏳ Horas Restantes: **{st.session_state.horas_restantes}h**")
@@ -520,14 +528,18 @@ else:
     st.divider()
     
     if st.session_state.venceu_atual:
-        # Puxa a imagem triste (preso). Se não existir ainda, usa a normal como segurança.
         imagem_final = st.session_state.vilao.get("imagem_preso", st.session_state.vilao["imagem"])
-        st.image(imagem_final, width=250, caption=f"VILÃO CAPTURADO: {st.session_state.vilao['nome'].upper()}")
+        try:
+            st.image(imagem_final, width=250, caption=f"VILÃO CAPTURADO: {st.session_state.vilao['nome'].upper()}")
+        except:
+            st.warning(f"Imagem não encontrada: {imagem_final}")
         st.success("Você solucionou o caso! O seu registro foi atualizado.")
     else:
-        # Puxa a imagem feliz (fuga). Se não existir ainda, usa a normal como segurança.
         imagem_final = st.session_state.vilao.get("imagem_fuga", st.session_state.vilao["imagem"])
-        st.image(imagem_final, width=250, caption=f"VILÃO FORAGIDO: {st.session_state.vilao['nome'].upper()}")
+        try:
+            st.image(imagem_final, width=250, caption=f"VILÃO FORAGIDO: {st.session_state.vilao['nome'].upper()}")
+        except:
+            st.warning(f"Imagem não encontrada: {imagem_final}")
         st.error("Caso encerrado sem sucesso. O seu registro permanecerá o mesmo.")
         
     if st.button("🚔 Solicitar Novo Caso à DIE"):
