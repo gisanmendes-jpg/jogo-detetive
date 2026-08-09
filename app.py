@@ -36,7 +36,7 @@ mapa_mundi = {
     # ================= AMÉRICAS =================
     "Rio de Janeiro": {
         "conexoes": ["Lima", "Nova York", "Tóquio", "Buenos Aires", "Cidade do Cabo"],
-        "imagem": "https://placehold.co/800x300/2E8B57/FFFFFF?text=Rio+de+Janeiro",
+        "imagem": "https://placehold.co/400x150/2E8B57/FFFFFF?text=Rio+de+Janeiro",
         "fatos": [
             "O suspeito queria ver o Cristo Redentor.",
             "Trocou dinheiro por Reais.",
