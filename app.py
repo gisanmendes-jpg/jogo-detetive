@@ -408,7 +408,12 @@ if 'horas_restantes' not in st.session_state:
 # 3. INTERFACE STREAMLIT
 # ==========================================
 st.set_page_config(page_title="DIE - Investigações", page_icon="🕵️", layout="wide")
-
+# ==========================================
+# BOTÃO DE DEBUG: RESETAR MEMÓRIA (Útil para desenvolvimento)
+# ==========================================
+if st.sidebar.button("🔄 Reiniciar Jogo do Zero"):
+    st.session_state.clear()
+    st.rerun()
 # ==========================================
 # TELA 1: INÍCIO (BOAS VINDAS)
 # ==========================================
