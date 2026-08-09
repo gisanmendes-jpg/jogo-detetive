@@ -372,7 +372,7 @@ if 'horas_restantes' not in st.session_state:
 st.set_page_config(page_title="DIE - Investigações", page_icon="🕵️", layout="wide")
 
 # Banner de Título (Substitui o st.title)
-st.image("https://placehold.co/1200x250/111111/FFD700?text=DIE+%E2%80%94+Divis%C3%A3o+de+Investiga%C3%A7%C3%B5es+Especiais", use_container_width=True)
+st.image("", use_container_width=True)
 
 # Cabeçalho Superior
 col_header1, col_header2 = st.columns([3, 1])
