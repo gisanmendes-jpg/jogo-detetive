@@ -2,53 +2,278 @@ import streamlit as st
 import random
 
 # ==========================================
-# 1. BANCOS DE DADOS COMPLETOS
+# 1. BANCOS DE DADOS
 # ==========================================
-banco_suspeitos = [
+banco_capangas = [
     {"nome": "Gabi Aura Monster", "sexo": "F", "cabelo": "Castanho", "detalhes": "Jóia"},
     {"nome": "Denji",  "sexo": "M", "cabelo": "Loiro", "detalhes": "Tapa olho"},
     {"nome": "Nana",  "sexo": "F", "cabelo": "Ruivo", "detalhes": "Jóia"},
     {"nome": "Gisa Estrela",  "sexo": "F", "cabelo": "Castanho", "detalhes": "Tatuagem"},
-    {"nome": "Makima",  "sexo": "F", "cabelo": "Ruivo", "detalhes": "Tatuagem"},
     {"nome": "Scarlet",  "sexo": "F", "cabelo": "Preto", "detalhes": "Cicatriz"},
     {"nome": "Ryan",  "sexo": "M", "cabelo": "Preto", "detalhes": "Jóia"},
     {"nome": "Mayah",  "sexo": "F", "cabelo": "Preto", "detalhes": "Tapa olho"},
     {"nome": "Elsa",  "sexo": "F", "cabelo": "Preto", "detalhes": "Jóia"},
     {"nome": "Douma",  "sexo": "M", "cabelo": "Loiro", "detalhes": "Tatuagem"},
-    {"nome": "Muzan",  "sexo": "M", "cabelo": "Branco", "detalhes": "Cicatriz"},
     {"nome": "Haru",  "sexo": "M", "cabelo": "Branco", "detalhes": "Tapa olho"},
     {"nome": "Roger",  "sexo": "M", "cabelo": "Preto", "detalhes": "Tatuagem"},
     {"nome": "Clara",  "sexo": "F", "cabelo": "Preto", "detalhes": "Cicatriz"}
 ]
 
+banco_chefes = [
+    {"nome": "Makima",  "sexo": "F", "cabelo": "Ruivo", "detalhes": "Tatuagem"},
+    {"nome": "Muzan",  "sexo": "M", "cabelo": "Branco", "detalhes": "Cicatriz"}
+]
+
+banco_suspeitos = banco_capangas + banco_chefes
+
 mapa_mundi = {
+    # ================= AMÉRICAS =================
     "Rio de Janeiro": {
-        "conexoes": ["Lima", "Nova York", "Tóquio"],
-        "fatos": ["O suspeito queria ver o Cristo Redentor.", "Trocou dinheiro por Reais."]
+        "conexoes": ["Lima", "Nova York", "Tóquio", "Buenos Aires", "Cidade do Cabo"],
+        "fatos": [
+            "O suspeito queria ver o Cristo Redentor.",
+            "Trocou dinheiro por Reais.",
+            "Disse que pretendia subir de bondinho até o Pão de Açúcar.",
+            "Foi visto caminhando pelo calçadão de Copacabana.",
+            "Perguntou onde poderia assistir a um desfile de escolas de samba.",
+            "Comprou uma camisa de futebol perto do Maracanã.",
+            "Perguntou como chegar à Baía de Guanabara.",
+            "Foi visto fotografando os Arcos da Lapa.",
+            "Perguntou onde ficava a Floresta da Tijuca.",
+            "Comentou que queria assistir ao pôr do sol na Pedra do Arpoador."
+        ]
     },
     "Lima": {
-        "conexoes": ["Rio de Janeiro", "Nova York", "Cidade do México"],
-        "fatos": ["Queria conhecer o estádio onde o Flamengo foi campeão.", "Perguntou sobre Machu Picchu."]
-    },
-    "Tóquio": {
-        "conexoes": ["Rio de Janeiro", "Nova York", "Londres"],
-        "fatos": ["Estava estudando japonês.", "Mencionou o Monte Fuji."]
+        "conexoes": ["Rio de Janeiro", "Nova York", "Cidade do México", "Buenos Aires", "Sydney"],
+        "fatos": [
+            "Queria conhecer o estádio Monumental onde o Flamengo foi campeão.",
+            "Perguntou sobre as ruínas de Machu Picchu.",
+            "Trocou seu dinheiro por Soles Peruanos.",
+            "Foi visto comendo um Ceviche tradicional.",
+            "Falou sobre sobrevoar as misteriosas Linhas de Nazca.",
+            "Queria ver lhamas e alpacas de perto.",
+            "Tinha um guia turístico sobre a Cordilheira dos Andes."
+        ]
     },
     "Nova York": {
-        "conexoes": ["Rio de Janeiro", "Lima", "Tóquio", "Paris", "Cidade do México"],
-        "fatos": ["Perguntou sobre a Estátua da Liberdade.", "Tinha um mapa de Manhattan."]
-    },
-    "Paris": {
-        "conexoes": ["Nova York", "Tóquio", "Londres"],
-        "fatos": ["Disse que gostaria de ver a torre Eiffel.", "Tinha uma bandeira com as cores azul, branca e vermelha."]
-    },
-    "Londres": {
-        "conexoes": ["Paris", "Tóquio", "Cidade do México"],
-        "fatos": ["Estava tomando chá preto.", "Queria ajustar o relógio para ver o Big Ben."]
+        "conexoes": ["Rio de Janeiro", "Lima", "Paris", "Cidade do México", "Toronto", "Londres", "Los Angeles"],
+        "fatos": [
+            "Perguntou onde ficava a balsa para a Estátua da Liberdade.",
+            "Tinha um mapa detalhado da ilha de Manhattan.",
+            "Trocou toda a sua moeda por Dólares Americanos.",
+            "Foi visto comendo um cachorro-quente nas escadarias da Times Square.",
+            "Disse que iria assistir a um famoso musical na Broadway.",
+            "Perguntou como alugar uma bicicleta no Central Park.",
+            "Disse que estava indo para a 'cidade que nunca dorme'."
+        ]
     },
     "Cidade do México": {
-        "conexoes": ["Lima", "Londres", "Nova York"],
-        "fatos": ["Comeu muitos tacos.", "Tinha um sombreiro na mala."]
+        "conexoes": ["Lima", "Londres", "Nova York", "Toronto", "Buenos Aires", "Los Angeles"],
+        "fatos": [
+            "Comeu muitos tacos com pimenta e guacamole.",
+            "Comprou um sombreiro gigante em uma feira de rua.",
+            "Trocou dinheiro por Pesos Mexicanos.",
+            "Perguntou como chegar às enormes pirâmides de Teotihuacán.",
+            "Disse que queria visitar a casa azul da artista Frida Kahlo.",
+            "Comentou sobre assistir a uma luta mascarada de Lucha Libre.",
+            "Tinha um mapa mostrando antigas ruínas do império asteca."
+        ]
+    },
+    "Buenos Aires": {
+        "conexoes": ["Rio de Janeiro", "Lima", "Cidade do México"],
+        "fatos": [
+            "Foi visto comendo um alfajor de doce de leite.",
+            "Perguntou onde poderia assistir a um show de Tango.",
+            "Trocou seu dinheiro por Pesos Argentinos.",
+            "Comprou uma camisa da seleção com o número 10 nas costas.",
+            "Queria tirar uma foto em frente ao enorme Obelisco da cidade.",
+            "Perguntou como chegar ao bairro colorido do Caminito.",
+            "Disse que queria ver a Casa Rosada."
+        ]
+    },
+    "Toronto": {
+        "conexoes": ["Nova York", "Cidade do México"],
+        "fatos": [
+            "Reclamou do frio e comprou um casaco muito pesado.",
+            "Tinha um broche com uma folha de bordo (maple) vermelha.",
+            "Trocou o dinheiro por Dólares Canadenses.",
+            "Perguntou como subir na famosa CN Tower.",
+            "Foi visto comprando ingressos para um jogo de hóquei no gelo.",
+            "Disse que iria visitar as Cataratas do Niágara no fim de semana.",
+            "Estava tomando xarope de bordo com panquecas."
+        ]
+    },
+    "Los Angeles": {
+        "conexoes": ["Nova York", "Cidade do México", "Sydney", "Tóquio"],
+        "fatos": [
+            "Estava procurando o letreiro gigante de Hollywood nas colinas.",
+            "Perguntou onde ficava a Calçada da Fama.",
+            "Foi visto andando de patins em Venice Beach.",
+            "Reclamou muito do trânsito nas autoestradas (Freeways).",
+            "Tinha um mapa das casas dos astros de cinema.",
+            "Disse que iria visitar o primeiro parque da Disneylândia.",
+            "Trocou seu dinheiro por Dólares Americanos e foi surfar."
+        ]
+    },
+
+    # ================= EUROPA =================
+    "Paris": {
+        "conexoes": ["Nova York", "Londres", "Roma", "Berlim"],
+        "fatos": [
+            "Disse que faria um piquenique aos pés da Torre Eiffel.",
+            "Tinha um broche com uma bandeira listrada em azul, branco e vermelho.",
+            "Trocou seu dinheiro por Euros.",
+            "Foi visto comendo um croissant em uma padaria local.",
+            "Disse que queria ver de perto o quadro da Mona Lisa no Louvre.",
+            "Foi visto passeando de barco pelas águas do Rio Sena.",
+            "Comentou sobre o trânsito caótico em volta do Arco do Triunfo."
+        ]
+    },
+    "Londres": {
+        "conexoes": ["Paris", "Cidade do México", "Nova York", "Berlim", "Roma", "Nova Délhi", "Dubai"],
+        "fatos": [
+            "Estava tomando chá preto pontualmente às 17h.",
+            "Queria ajustar o relógio para bater com o horário do Big Ben.",
+            "Pagou a conta da pousada usando Libras Esterlinas.",
+            "Foi visto andando no segundo andar de um ônibus vermelho.",
+            "Perguntou se a guarda real estava marchando no Palácio de Buckingham.",
+            "Entrou em uma clássica cabine telefônica vermelha para fazer uma ligação.",
+            "Comentou que precisava pegar o 'Tube', o famoso metrô local."
+        ]
+    },
+    "Roma": {
+        "conexoes": ["Paris", "Londres", "Cairo", "Berlim"],
+        "fatos": [
+            "Perguntou como chegar às ruínas do Coliseu.",
+            "Foi visto jogando uma moeda na Fonte de Trevi.",
+            "Pediu uma autêntica pizza margherita no almoço.",
+            "Queria visitar o menor país do mundo, a sede da Igreja Católica.",
+            "Trocou dinheiro por Euros.",
+            "Disse que adoraria ver artefatos do antigo Império Romano.",
+            "Estava tomando um gelato de pistache."
+        ]
+    },
+    "Berlim": {
+        "conexoes": ["Paris", "Londres", "Roma", "Moscou"],
+        "fatos": [
+            "Perguntou onde ficavam os restos do famoso muro que dividiu a cidade.",
+            "Foi tirar uma foto no Portão de Brandemburgo.",
+            "Estava comendo salsichão (Bratwurst) e bebendo cerveja local.",
+            "Trocou o dinheiro por Euros.",
+            "Queria visitar o prédio do Parlamento (Reichstag).",
+            "Falou sobre a rica história da Segunda Guerra Mundial.",
+            "Tinha um dicionário de alemão no bolso."
+        ]
+    },
+    "Moscou": {
+        "conexoes": ["Tóquio", "Berlim", "Pequim"],
+        "fatos": [
+            "Comprou um conjunto de bonecas Matrioscas.",
+            "Queria passear pela famosa Praça Vermelha.",
+            "Trocou o dinheiro por Rublos.",
+            "Reclamou do frio congelante e comprou um chapéu de pele.",
+            "Perguntou como agendar uma visita ao Kremlin.",
+            "Tinha um guia sobre a antiga União Soviética.",
+            "Foi visto observando a arquitetura colorida da Catedral de São Basílio."
+        ]
+    },
+
+    # ================= ÁSIA, ÁFRICA E OCEANIA =================
+    "Tóquio": {
+        "conexoes": ["Rio de Janeiro", "Moscou", "Pequim", "Sydney", "Los Angeles"],
+        "fatos": [
+            "Estava estudando o alfabeto japonês.",
+            "Mencionou que queria escalar o Monte Fuji.",
+            "Trocou notas grandes por Ienes.",
+            "Perguntou o horário de partida do trem-bala (Shinkansen).",
+            "Foi visto comprando mangás em Akihabara.",
+            "Queria tirar uma foto no movimentado cruzamento de Shibuya.",
+            "Disse que iria comer sushi e sashimi no jantar."
+        ]
+    },
+    "Pequim": {
+        "conexoes": ["Tóquio", "Sydney", "Moscou", "Nova Délhi", "Bangkok"],
+        "fatos": [
+            "Perguntou qual era o melhor trecho para visitar a Grande Muralha.",
+            "Queria entrar no palácio imperial da Cidade Proibida.",
+            "Trocou dinheiro por Yuans.",
+            "Tinha um chaveiro com um Urso Panda de pelúcia.",
+            "Foi visto comendo pato laqueado tradicional.",
+            "Comprou decorações em formato de dragões vermelhos.",
+            "Comentou que o país tem mais de 1 bilhão de habitantes."
+        ]
+    },
+    "Nova Délhi": {
+        "conexoes": ["Londres", "Cairo", "Pequim", "Dubai", "Bangkok"],
+        "fatos": [
+            "Tinha um bilhete de trem para ver o Taj Mahal.",
+            "Trocou o dinheiro por Rúpias.",
+            "Comentou que o trânsito de tuk-tuks era uma loucura.",
+            "Foi visto comendo frango ao curry bem apimentado.",
+            "Perguntou sobre os rituais sagrados no Rio Ganges.",
+            "Estudava sobre meditação e a cultura hindu.",
+            "Tirou fotos de vacas andando livremente pelas ruas."
+        ]
+    },
+    "Bangkok": {
+        "conexoes": ["Pequim", "Nova Délhi", "Sydney"],
+        "fatos": [
+            "Reclamou do forte calor tropical.",
+            "Tinha um guia sobre templos budistas cheios de ouro.",
+            "Foi visto negociando com o motorista de um tuk-tuk colorido.",
+            "Pediu um Pad Thai bem temperado no mercado de rua.",
+            "Trocou a sua moeda por Bahts.",
+            "Perguntou como chegar aos famosos Mercados Flutuantes.",
+            "Disse que iria fazer uma massagem tailandesa depois da viagem."
+        ]
+    },
+    "Dubai": {
+        "conexoes": ["Cairo", "Nova Délhi", "Londres"],
+        "fatos": [
+            "Perguntou se o elevador para o prédio mais alto do mundo demorava muito.",
+            "Trocou seu dinheiro por Dirhams.",
+            "Agendou um passeio de luxo pelas dunas do deserto.",
+            "Queria ver as ilhas artificiais construídas em formato de palmeira.",
+            "Foi visto entrando em um hotel em formato de vela de barco.",
+            "Comentou sobre a impressionante riqueza da cidade.",
+            "Estava observando carros superesportivos passando na avenida."
+        ]
+    },
+    "Cairo": {
+        "conexoes": ["Roma", "Cidade do Cabo", "Nova Délhi", "Dubai"],
+        "fatos": [
+            "Queria fazer um passeio de camelo ao entardecer.",
+            "Tinha um mapa detalhado das Grandes Pirâmides de Gizé.",
+            "Foi visto navegando em um barco tradicional pelo Rio Nilo.",
+            "Perguntou sobre a máscara de ouro do faraó Tutancâmon.",
+            "Trocou a moeda por Libras Egípcias.",
+            "Tirou uma foto na frente de uma gigantesca estátua de Esfinge.",
+            "Comentou que o calor do deserto era implacável."
+        ]
+    },
+    "Cidade do Cabo": {
+        "conexoes": ["Rio de Janeiro", "Cairo"],
+        "fatos": [
+            "Perguntou como subir a famosa Table Mountain (Montanha da Mesa).",
+            "Agendou um safári para tentar ver leões e elefantes.",
+            "Trocou o dinheiro por Rands.",
+            "Disse que queria visitar a ilha onde Nelson Mandela ficou preso.",
+            "Foi fotografar uma colônia de pinguins na praia.",
+            "Tinha um livro sobre o extremo sul do continente africano.",
+            "Comentou que iria ver o encontro dos oceanos Atlântico e Índico."
+        ]
+    },
+    "Sydney": {
+        "conexoes": ["Tóquio", "Lima", "Pequim", "Los Angeles", "Bangkok"],
+        "fatos": [
+            "Queria ir a um santuário ver cangurus e coalas.",
+            "Foi fotografar a famosa Casa de Ópera com formato de velas.",
+            "Comprou uma prancha de surfe e foi para Bondi Beach.",
+            "Disse que iria mergulhar na Grande Barreira de Corais.",
+            "Trocou seu dinheiro por Dólares Australianos.",
+            "Comprou um bumerangue artesanal em uma feira.",
+            "Comentou sobre viajar pelo grande deserto do Outback."
+        ]
     }
 }
 
@@ -56,57 +281,91 @@ locais_fisicos = ["Hotel", "Clube Esportivo", "Restaurante", "Cafeteria", "Spa"]
 locais_geograficos = ["Banco", "Aeroporto", "Porto", "Livraria", "Mercado Central", "Museu", "Agência de Turismo"]
 
 # ==========================================
-# 2. INICIALIZAÇÃO DO ESTADO
+# 2. SISTEMA DE PROGRESSÃO E PATENTES
 # ==========================================
-def iniciar_novo_jogo():
-    st.session_state.vilao = random.choice(banco_suspeitos)
-    todas_cidades = list(mapa_mundi.keys())
+def calcular_dificuldade(casos):
+    if casos == 0:
+        return "Recruta", 4, 120, False
+    elif casos == 1:
+        return "Detetive Júnior", 5, 110, False
+    elif casos == 2:
+        return "Detetive Particular", 6, 100, False
+    elif casos == 3:
+        return "Investigador", 7, 90, False
+    elif casos == 4:
+        return "Detetive de Elite", 8, 80, False
+    else:
+        return "Super Detetive", 9, 80, True
+
+def sortear_locais():
+    # Sorteia os locais e os armazena no estado da sessão para não mudarem sozinhos
+    st.session_state.locais_cidade = random.sample(locais_fisicos, 1) + random.sample(locais_geograficos, 2)
+    random.shuffle(st.session_state.locais_cidade)
+
+def iniciar_nova_partida(venceu_anterior=False):
+    if 'casos_resolvidos' not in st.session_state:
+        st.session_state.casos_resolvidos = 0
+    elif venceu_anterior:
+        st.session_state.casos_resolvidos += 1
+
+    patente, tamanho_rota, horas_restantes, enfrenta_chefe = calcular_dificuldade(st.session_state.casos_resolvidos)
     
-    # ROTA LONGA (5 cidades) para dar tempo de investigar
-    tamanho_rota = 5
+    if enfrenta_chefe:
+        vilao = random.choice(banco_chefes) if random.choice([True, False]) else random.choice(banco_capangas)
+    else:
+        vilao = random.choice(banco_capangas)
+
+    todas_cidades = list(mapa_mundi.keys())
     cidade_atual_setup = random.choice(todas_cidades)
     rota_fuga = [cidade_atual_setup]
 
     while len(rota_fuga) < tamanho_rota:
         opcoes = [c for c in mapa_mundi[rota_fuga[-1]]["conexoes"] if c not in rota_fuga]
-        if not opcoes: 
+        if not opcoes:
             break
         proxima = random.choice(opcoes)
         rota_fuga.append(proxima)
-    
+
+    st.session_state.patente = patente
+    st.session_state.vilao = vilao
     st.session_state.rota_fuga = rota_fuga
     st.session_state.local_atual = rota_fuga[0]
-    st.session_state.horas_restantes = 100 # Tempo restaurado para 100h
+    st.session_state.horas_restantes = horas_restantes
     st.session_state.mandado_ativo = None
-    st.session_state.mensagem_tela = ""
     st.session_state.jogo_acabou = False
-    
+    st.session_state.mensagem_tela = ""
+    st.session_state.venceu_atual = False
     sortear_locais()
 
-def sortear_locais():
-    # Sorteia sempre 1 local físico e 2 geográficos
-    st.session_state.locais_cidade = random.sample(locais_fisicos, 1) + random.sample(locais_geograficos, 2)
-    random.shuffle(st.session_state.locais_cidade)
-
+# Inicia o jogo na primeira vez que a página carrega
 if 'horas_restantes' not in st.session_state:
-    iniciar_novo_jogo()
+    iniciar_nova_partida()
 
 # ==========================================
-# 3. INTERFACE E LÓGICA
+# 3. INTERFACE STREAMLIT
 # ==========================================
-st.set_page_config(page_title="Agência ACME", page_icon="🕵️")
-st.title("🕵️ Agência ACME")
+st.set_page_config(page_title="Agência ACME", page_icon="🕵️", layout="wide")
+
+# Cabeçalho Superior
+col_header1, col_header2 = st.columns([3, 1])
+with col_header1:
+    st.title("🕵️ Agência ACME - Investigações")
+with col_header2:
+    st.metric(label="Casos Resolvidos", value=st.session_state.casos_resolvidos)
+    st.caption(f"Patente: **{st.session_state.patente.upper()}**")
+
+st.divider()
 
 # Fim de Jogo por Tempo
 if st.session_state.horas_restantes <= 0 and not st.session_state.jogo_acabou:
     st.session_state.mensagem_tela = f"⏰ O TEMPO ACABOU! O vilão escapou. O culpado era: {st.session_state.vilao['nome']}."
     st.session_state.jogo_acabou = True
+    st.session_state.venceu_atual = False
 
 # --- BARRA LATERAL: INTERPOL ---
 st.sidebar.header("💻 Computador da Interpol")
 st.sidebar.write("Cruze os dados para emitir o mandado. Custa 1h.")
 
-# Menus Suspensos da Interpol
 p_sex = st.sidebar.selectbox("Sexo", ["---", "F", "M"])
 p_cab = st.sidebar.selectbox("Cabelo", ["---", "Castanho", "Preto", "Loiro", "Ruivo", "Branco"])
 p_det = st.sidebar.selectbox("Detalhe", ["---", "Jóia", "Tatuagem", "Cicatriz", "Tapa olho"])
@@ -114,10 +373,15 @@ p_det = st.sidebar.selectbox("Detalhe", ["---", "Jóia", "Tatuagem", "Cicatriz",
 if st.sidebar.button("🚨 Emitir Mandado", disabled=st.session_state.jogo_acabou):
     st.session_state.horas_restantes -= 1
     
+    # Converte os "---" para None para bater com a lógica do seu código
+    sexo_filtro = p_sex if p_sex != "---" else None
+    cabelo_filtro = p_cab if p_cab != "---" else None
+    detalhe_filtro = p_det if p_det != "---" else None
+
     filtrados = [s for s in banco_suspeitos if 
-                 (p_sex == "---" or s["sexo"] == p_sex) and
-                 (p_cab == "---" or s["cabelo"] == p_cab) and
-                 (p_det == "---" or s["detalhes"] == p_det)]
+                 (sexo_filtro is None or s["sexo"] == sexo_filtro) and
+                 (cabelo_filtro is None or s["cabelo"] == cabelo_filtro) and
+                 (detalhe_filtro is None or s["detalhes"] == detalhe_filtro)]
     
     if len(filtrados) == 1:
         st.session_state.mandado_ativo = filtrados[0]["nome"]
@@ -126,21 +390,22 @@ if st.sidebar.button("🚨 Emitir Mandado", disabled=st.session_state.jogo_acabo
         st.session_state.mandado_ativo = None
         st.sidebar.warning(f"Inconclusivo. {len(filtrados)} suspeitos na lista.")
         for s in filtrados:
-            st.sidebar.caption(f"- {s['nome']}") # Mostra quem sobrou na lista!
+            st.sidebar.caption(f"- {s['nome']}")
 
 # --- TELA PRINCIPAL ---
 st.subheader(f"📍 Local Atual: {st.session_state.local_atual.upper()}")
-st.progress(max(0, st.session_state.horas_restantes) / 100) 
+st.progress(max(0, st.session_state.horas_restantes) / 120) 
 st.write(f"⏳ Horas Restantes: **{st.session_state.horas_restantes}h**")
 
-# Exibe mensagens (dicas de testemunhas ou alertas de vitória/derrota)
 if st.session_state.mensagem_tela:
     st.info(st.session_state.mensagem_tela)
 
+# Se o jogo ainda está rolando (Exibe Botões de Ação)
 if not st.session_state.jogo_acabou:
-    col1, col2 = st.columns(2)
+    col_inv, col_via = st.columns(2)
     
-    with col1:
+    # COLUNA 1: INVESTIGAR
+    with col_inv:
         st.markdown("### 🔍 Investigar (2h)")
         for local in st.session_state.locais_cidade:
             if st.button(f"🏢 Ir para: {local}"):
@@ -149,23 +414,23 @@ if not st.session_state.jogo_acabou:
                 if st.session_state.local_atual in st.session_state.rota_fuga:
                     indice = st.session_state.rota_fuga.index(st.session_state.local_atual)
                     
-                    # Se chegou na última cidade
                     if indice == len(st.session_state.rota_fuga) - 1:
                         st.session_state.mensagem_tela = f"🕵️ Você invadiu o(a) {local} e achou o esconderijo do vilão!"
+                        st.session_state.jogo_acabou = True
                         
                         if st.session_state.mandado_ativo == st.session_state.vilao["nome"]:
                             st.session_state.mensagem_tela += f"\n🎉 PARABÉNS! Você prendeu {st.session_state.vilao['nome']} com sucesso!"
+                            st.session_state.venceu_atual = True
                             st.balloons()
                         else:
                             st.session_state.mensagem_tela += "\n❌ O vilão escapou! A polícia não tinha um mandado de prisão válido no nome dele."
-                        st.session_state.jogo_acabou = True
+                            st.session_state.venceu_atual = False
+                            
                         st.rerun()
-                        
                     else:
                         proximo_destino = st.session_state.rota_fuga[indice + 1]
                         
-                        # Dica Física (Locais Físicos)
-                        if local in locais_fisicos:
+                        if local in locais_fisicos: 
                             dicas_fisicas = [
                                 f"Notei que era uma pessoa do sexo {st.session_state.vilao['sexo']}.",
                                 f"A pessoa tinha cabelo {st.session_state.vilao['cabelo']}."
@@ -176,9 +441,7 @@ if not st.session_state.jogo_acabou:
                                 dicas_fisicas.append(f"Me chamou a atenção que a pessoa tinha um(a) {st.session_state.vilao['detalhes']}.")
                                 
                             dica = random.choice(dicas_fisicas)
-                        
-                        # Dica Geográfica (Aeroporto, Banco, etc)
-                        else:
+                        else: 
                             dica = random.choice(mapa_mundi[proximo_destino]["fatos"])
                             
                         st.session_state.mensagem_tela = f"Testemunha no(a) {local}: '{dica}'"
@@ -186,7 +449,8 @@ if not st.session_state.jogo_acabou:
                     st.session_state.mensagem_tela = f"Testemunha no(a) {local}: 'Não vi ninguém suspeito por aqui.'"
                 st.rerun()
 
-    with col2:
+    # COLUNA 2: VIAJAR
+    with col_via:
         st.markdown("### ✈️ Viajar (8h)")
         destinos = mapa_mundi[st.session_state.local_atual]["conexoes"]
         
@@ -195,9 +459,17 @@ if not st.session_state.jogo_acabou:
                 st.session_state.local_atual = dest
                 st.session_state.horas_restantes -= 8
                 st.session_state.mensagem_tela = f"Você viajou para {dest}."
-                sortear_locais()
+                sortear_locais() # Sorteia os locais da nova cidade
                 st.rerun()
+
+# Se o jogo acabou (Exibe Tela de Resumo e Restart)
 else:
-    if st.button("🔄 Jogar Novamente"):
-        iniciar_novo_jogo()
+    st.divider()
+    if st.session_state.venceu_atual:
+        st.success("Você solucionou o caso! O seu registro foi atualizado.")
+    else:
+        st.error("Caso encerrado sem sucesso. O seu registro permanecerá o mesmo.")
+        
+    if st.button("🚔 Solicitar Novo Caso à Agência"):
+        iniciar_nova_partida(venceu_anterior=st.session_state.venceu_atual)
         st.rerun()
