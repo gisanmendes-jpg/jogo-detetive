@@ -542,6 +542,4 @@ else:
             st.warning(f"Imagem não encontrada: {imagem_final}")
         st.error("Caso encerrado sem sucesso. O seu registro permanecerá o mesmo.")
         
-    if st.button("🚔 Solicitar Novo Caso à DIE"):
-        iniciar_nova_partida(venceu_anterior=st.session_state.venceu_atual)
-        st.rerun()
+        st.button("🚔 Solicitar Novo Caso à DIE", on_click=iniciar_nova_partida, kwargs={"venceu_anterior": st.session_state.venceu_atual})
