@@ -263,7 +263,7 @@ mapa_mundi = {
     },
     "Cairo": {
         "conexoes": ["Roma", "Cidade do Cabo", "Nova Délhi", "Dubai"],
-        "imagem": "https://placehold.co/800x300/F4A460/FFFFFF?text=Cairo",
+        "imagem": "cairo.jpg",
         "fatos": [
             "Queria fazer um passeio de camelo ao entardecer.",
             "Tinha um mapa detalhado das Grandes Pirâmides de Gizé.",
@@ -276,7 +276,7 @@ mapa_mundi = {
     },
     "Cidade do Cabo": {
         "conexoes": ["Rio de Janeiro", "Cairo"],
-        "imagem": "https://placehold.co/800x300/556B2F/FFFFFF?text=Cidade+do+Cabo",
+        "imagem": "cc.jpg",
         "fatos": [
             "Perguntou como subir a famosa Table Mountain (Montanha da Mesa).",
             "Agendou um safári para tentar ver leões e elefantes.",
@@ -289,7 +289,7 @@ mapa_mundi = {
     },
     "Sydney": {
         "conexoes": ["Tóquio", "Lima", "Pequim", "Los Angeles", "Bangkok"],
-        "imagem": "https://placehold.co/800x300/000080/FFFFFF?text=Sydney",
+        "imagem": "sy.jpg",
         "fatos": [
             "Queria ir a um santuário ver cangurus e coalas.",
             "Foi fotografar a famosa Casa de Ópera com formato de velas.",
