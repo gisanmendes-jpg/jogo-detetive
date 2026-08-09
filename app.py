@@ -78,7 +78,7 @@ mapa_mundi = {
     },
     "Cidade do México": {
         "conexoes": ["Lima", "Londres", "Nova York", "Toronto", "Buenos Aires", "Los Angeles"],
-        "imagem": "https://placehold.co/800x300/006400/FFFFFF?text=Cidade+do+Mexico",
+        "imagem": "mx.jpg",
         "fatos": [
             "Comeu muitos tacos com pimenta e guacamole.",
             "Comprou um sombreiro gigante em uma feira de rua.",
@@ -91,7 +91,7 @@ mapa_mundi = {
     },
     "Buenos Aires": {
         "conexoes": ["Rio de Janeiro", "Lima", "Cidade do México"],
-        "imagem": "https://placehold.co/800x300/4169E1/FFFFFF?text=Buenos+Aires",
+        "imagem": "ba.jpg",
         "fatos": [
             "Foi visto comendo um alfajor de doce de leite.",
             "Perguntou onde poderia assistir a um show de Tango.",
