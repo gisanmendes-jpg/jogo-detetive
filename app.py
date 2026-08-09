@@ -2,25 +2,17 @@ import streamlit as st
 import random
 from PIL import Image
 
-# Configuração da página DEVE ser o primeiro comando Streamlit!
-st.set_page_config(page_title="DIE - Investigações", page_icon="🕵️", layout="wide")
-
 # ==========================================
 # SETUP INICIAL DAS VARIÁVEIS DE SESSÃO
 # ==========================================
 if 'casos_resolvidos' not in st.session_state:
     st.session_state.casos_resolvidos = 0
 if 'tela_atual' not in st.session_state:
-    st.session_state.tela_atual = "inicio"
+    st.session_state.tela_atual = "inicio" # Controla em qual tela estamos (inicio, briefing, jogo)
 if 'nome_jogador' not in st.session_state:
     st.session_state.nome_jogador = ""
 if 'artefato_roubado' not in st.session_state:
     st.session_state.artefato_roubado = ""
-
-# --- TRAVA DE SEGURANÇA CONTRA CACHE ANTIGO ---
-if st.session_state.nome_jogador == "":
-    st.session_state.tela_atual = "inicio"
-# ----------------------------------------------
 
 # ==========================================
 # 1. BANCOS DE DADOS (COM IMAGENS E ARTEFATOS)
