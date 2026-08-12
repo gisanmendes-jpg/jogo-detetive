@@ -55,24 +55,17 @@ mapa_mundi = {
             "Disse que pretendia subir de bondinho até o Pão de Açúcar.",
             "Foi visto caminhando pelo calçadão de Copacabana.",
             "Perguntou onde poderia assistir a um desfile de escolas de samba.",
-            "Comprou uma camisa de futebol perto do Maracanã.",
-            "Perguntou como chegar à Baía de Guanabara.",
-            "Foi visto fotografando os Arcos da Lapa.",
-            "Perguntou onde ficava a Floresta da Tijuca.",
-            "Comentou que queria assistir ao pôr do sol na Pedra do Arpoador."
+            "Comprou uma camisa de futebol perto do Maracanã."
         ]
     },
     "Lima": {
         "conexoes": ["Rio de Janeiro", "Nova York", "Cidade do México", "Buenos Aires", "Sydney"],
         "imagem": "lima.jpg",
         "fatos": [
-            "Queria conhecer o estádio Monumental onde o Flamengo foi campeão.",
+            "Queria conhecer o estádio Monumental.",
             "Perguntou sobre as ruínas de Machu Picchu.",
             "Trocou seu dinheiro por Soles Peruanos.",
-            "Foi visto comendo um Ceviche tradicional.",
-            "Falou sobre sobrevoar as misteriosas Linhas de Nazca.",
-            "Queria ver lhamas e alpacas de perto.",
-            "Tinha um guia turístico sobre a Cordilheira dos Andes."
+            "Foi visto comendo um Ceviche tradicional."
         ]
     },
     "Nova York": {
@@ -82,9 +75,6 @@ mapa_mundi = {
             "Perguntou onde ficava a balsa para a Estátua da Liberdade.",
             "Tinha um mapa detalhado da ilha de Manhattan.",
             "Trocou toda a sua moeda por Dólares Americanos.",
-            "Foi visto comendo um cachorro-quente nas escadarias da Times Square.",
-            "Disse que iria assistir a um famoso musical na Broadway.",
-            "Perguntou como alugar uma bicicleta no Central Park.",
             "Disse que estava indo para a 'cidade que nunca dorme'."
         ]
     },
@@ -95,10 +85,7 @@ mapa_mundi = {
             "Comeu muitos tacos com pimenta e guacamole.",
             "Comprou um sombreiro gigante em uma feira de rua.",
             "Trocou dinheiro por Pesos Mexicanos.",
-            "Perguntou como chegar às enormes pirâmides de Teotihuacán.",
-            "Disse que queria visitar a casa azul da artista Frida Kahlo.",
-            "Comentou sobre assistir a uma luta mascarada de Lucha Libre.",
-            "Tinha um mapa mostrando antigas ruínas do império asteca."
+            "Perguntou como chegar às enormes pirâmides de Teotihuacán."
         ]
     },
     "Buenos Aires": {
@@ -108,8 +95,6 @@ mapa_mundi = {
             "Foi visto comendo um alfajor de doce de leite.",
             "Perguntou onde poderia assistir a um show de Tango.",
             "Trocou seu dinheiro por Pesos Argentinos.",
-            "Queria tirar uma foto em frente ao enorme Obelisco da cidade.",
-            "Perguntou como chegar ao bairro colorido do Caminito.",
             "Disse que queria ver a Casa Rosada."
         ]
     },
@@ -118,25 +103,19 @@ mapa_mundi = {
         "imagem": "toro.jpg",
         "fatos": [
             "Reclamou do frio e comprou um casaco muito pesado.",
-            "Tinha um broche com uma folha de bordo (maple) vermelha.",
+            "Tinha um broche com uma folha de bordo vermelha.",
             "Trocou o dinheiro por Dólares Canadenses.",
-            "Perguntou como subir na famosa CN Tower.",
-            "Foi visto comprando ingressos para um jogo de hóquei no gelo.",
-            "Disse que iria visitar as Cataratas do Niágara no fim de semana.",
-            "Estava tomando xarope de bordo com panquecas."
+            "Foi visto comprando ingressos para um jogo de hóquei."
         ]
     },
     "Los Angeles": {
         "conexoes": ["Nova York", "Cidade do México", "Sydney", "Tóquio"],
         "imagem": "la.jpg",
         "fatos": [
-            "Estava procurando o letreiro gigante de Hollywood nas colinas.",
+            "Estava procurando o letreiro gigante de Hollywood.",
             "Perguntou onde ficava a Calçada da Fama.",
             "Foi visto andando de patins em Venice Beach.",
-            "Reclamou muito do trânsito nas autoestradas (Freeways).",
-            "Tinha um mapa das casas dos astros de cinema.",
-            "Disse que iria visitar o primeiro parque da Disneylândia.",
-            "Trocou seu dinheiro por Dólares Americanos e foi surfar."
+            "Disse que iria visitar o primeiro parque da Disneylândia."
         ]
     },
     "Paris": {
@@ -144,12 +123,9 @@ mapa_mundi = {
         "imagem": "paris.jpg",
         "fatos": [
             "Disse que faria um piquenique aos pés da Torre Eiffel.",
-            "Tinha um broche com uma bandeira listrada em azul, branco e vermelho.",
             "Trocou seu dinheiro por Euros.",
             "Foi visto comendo um croissant em uma padaria local.",
-            "Disse que queria ver de perto o quadro da Mona Lisa no Louvre.",
-            "Foi visto passeando de barco pelas águas do Rio Sena.",
-            "Comentou sobre o trânsito caótico em volta do Arco do Triunfo."
+            "Disse que queria ver de perto o quadro da Mona Lisa."
         ]
     },
     "Londres": {
@@ -159,10 +135,7 @@ mapa_mundi = {
             "Estava tomando chá preto pontualmente às 17h.",
             "Queria ajustar o relógio para bater com o horário do Big Ben.",
             "Pagou a conta da pousada usando Libras Esterlinas.",
-            "Foi visto andando no segundo andar de um ônibus vermelho.",
-            "Perguntou se a guarda real estava marchando no Palácio de Buckingham.",
-            "Entrou em uma clássica cabine telefônica vermelha para fazer uma ligação.",
-            "Comentou que precisava pegar o 'Tube', o famoso metrô local."
+            "Entrou em uma clássica cabine telefônica vermelha."
         ]
     },
     "Roma": {
@@ -172,9 +145,6 @@ mapa_mundi = {
             "Perguntou como chegar às ruínas do Coliseu.",
             "Foi visto jogando uma moeda na Fonte de Trevi.",
             "Pediu uma autêntica pizza margherita no almoço.",
-            "Queria visitar o menor país do mundo, a sede da Igreja Católica.",
-            "Trocou dinheiro por Euros.",
-            "Disse que adoraria ver artefatos do antigo Império Romano.",
             "Estava tomando um gelato de pistache."
         ]
     },
@@ -182,13 +152,10 @@ mapa_mundi = {
         "conexoes": ["Paris", "Londres", "Roma", "Moscou"],
         "imagem": "berlim.jpg",
         "fatos": [
-            "Perguntou onde ficavam os restos do famoso muro que dividiu a cidade.",
+            "Perguntou onde ficavam os restos do famoso muro.",
             "Foi tirar uma foto no Portão de Brandemburgo.",
-            "Estava comendo salsichão (Bratwurst) e bebendo cerveja local.",
-            "Trocou o dinheiro por Euros.",
-            "Queria visitar o prédio do Parlamento (Reichstag).",
-            "Falou sobre a rica história da Segunda Guerra Mundial.",
-            "Tinha um dicionário de alemão no bolso."
+            "Estava comendo salsichão e bebendo cerveja local.",
+            "Queria visitar o prédio do Parlamento."
         ]
     },
     "Moscou": {
@@ -198,10 +165,7 @@ mapa_mundi = {
             "Comprou um conjunto de bonecas Matrioscas.",
             "Queria passear pela famosa Praça Vermelha.",
             "Trocou o dinheiro por Rublos.",
-            "Reclamou do frio congelante e comprou um chapéu de pele.",
-            "Perguntou como agendar uma visita ao Kremlin.",
-            "Tinha um guia sobre a antiga União Soviética.",
-            "Foi visto observando a arquitetura colorida da Catedral de São Basílio."
+            "Reclamou do frio congelante e comprou um chapéu de pele."
         ]
     },
     "Tóquio": {
@@ -211,10 +175,7 @@ mapa_mundi = {
             "Estava estudando o alfabeto japonês.",
             "Mencionou que queria escalar o Monte Fuji.",
             "Trocou notas grandes por Ienes.",
-            "Perguntou o horário de partida do trem-bala (Shinkansen).",
-            "Foi visto comprando mangás em Akihabara.",
-            "Queria tirar uma foto no movimentado cruzamento de Shibuya.",
-            "Disse que iria comer sushi e sashimi no jantar."
+            "Foi visto comprando mangás em Akihabara."
         ]
     },
     "Pequim": {
@@ -224,10 +185,7 @@ mapa_mundi = {
             "Perguntou qual era o melhor trecho para visitar a Grande Muralha.",
             "Queria entrar no palácio imperial da Cidade Proibida.",
             "Trocou dinheiro por Yuans.",
-            "Tinha um chaveiro com um Urso Panda de pelúcia.",
-            "Foi visto comendo pato laqueado tradicional.",
-            "Comprou decorações em formato de dragões vermelhos.",
-            "Comentou que o país tem mais de 1 bilhão de habitantes."
+            "Foi visto comendo pato laqueado tradicional."
         ]
     },
     "Nova Délhi": {
@@ -236,10 +194,7 @@ mapa_mundi = {
         "fatos": [
             "Tinha um bilhete de trem para ver o Taj Mahal.",
             "Trocou o dinheiro por Rúpias.",
-            "Comentou que o trânsito de tuk-tuks era uma loucura.",
             "Foi visto comendo frango ao curry bem apimentado.",
-            "Perguntou sobre os rituais sagrados no Rio Ganges.",
-            "Estudava sobre meditação e a cultura hindu.",
             "Tirou fotos de vacas andando livremente pelas ruas."
         ]
     },
@@ -248,25 +203,19 @@ mapa_mundi = {
         "imagem": "bk.jpg",
         "fatos": [
             "Reclamou do forte calor tropical.",
-            "Tinha um guia sobre templos budistas cheios de ouro.",
-            "Foi visto negociando com o motorista de um tuk-tuk colorido.",
+            "Foi visto negociando com o motorista de um tuk-tuk.",
             "Pediu um Pad Thai bem temperado no mercado de rua.",
-            "Trocou a sua moeda por Bahts.",
-            "Perguntou como chegar aos famosos Mercados Flutuantes.",
-            "Disse que iria fazer uma massagem tailandesa depois da viagem."
+            "Perguntou como chegar aos famosos Mercados Flutuantes."
         ]
     },
     "Dubai": {
         "conexoes": ["Cairo", "Nova Délhi", "Londres"],
         "imagem": "dubai.jpg",
         "fatos": [
-            "Perguntou se o elevador para o prédio mais alto do mundo demorava muito.",
+            "Perguntou sobre o prédio mais alto do mundo.",
             "Trocou seu dinheiro por Dirhams.",
             "Agendou um passeio de luxo pelas dunas do deserto.",
-            "Queria ver as ilhas artificiais construídas em formato de palmeira.",
-            "Foi visto entrando em um hotel em formato de vela de barco.",
-            "Comentou sobre a impressionante riqueza da cidade.",
-            "Estava observando carros superesportivos passando na avenida."
+            "Foi visto entrando em um hotel em formato de vela."
         ]
     },
     "Cairo": {
@@ -274,25 +223,19 @@ mapa_mundi = {
         "imagem": "cairo.jpg",
         "fatos": [
             "Queria fazer um passeio de camelo ao entardecer.",
-            "Tinha um mapa detalhado das Grandes Pirâmides de Gizé.",
             "Foi visto navegando em um barco tradicional pelo Rio Nilo.",
-            "Perguntou sobre a máscara de ouro do faraó Tutancâmon.",
             "Trocou a moeda por Libras Egípcias.",
-            "Tirou uma foto na frente de uma gigantesca estátua de Esfinge.",
-            "Comentou que o calor do deserto era implacável."
+            "Tirou uma foto na frente de uma gigantesca Esfinge."
         ]
     },
     "Cidade do Cabo": {
         "conexoes": ["Rio de Janeiro", "Cairo"],
         "imagem": "cc.jpg",
         "fatos": [
-            "Perguntou como subir a famosa Table Mountain (Montanha da Mesa).",
+            "Perguntou como subir a Montanha da Mesa.",
             "Agendou um safári para tentar ver leões e elefantes.",
             "Trocou o dinheiro por Rands.",
-            "Disse que queria visitar a ilha onde Nelson Mandela ficou preso.",
-            "Foi fotografar uma colônia de pinguins na praia.",
-            "Tinha um livro sobre o extremo sul do continente africano.",
-            "Comentou que iria ver o encontro dos oceanos Atlântico e Índico."
+            "Foi fotografar uma colônia de pinguins na praia."
         ]
     },
     "Sydney": {
@@ -300,12 +243,9 @@ mapa_mundi = {
         "imagem": "sy.jpg",
         "fatos": [
             "Queria ir a um santuário ver cangurus e coalas.",
-            "Foi fotografar a famosa Casa de Ópera com formato de velas.",
+            "Foi fotografar a famosa Casa de Ópera.",
             "Comprou uma prancha de surfe e foi para Bondi Beach.",
-            "Disse que iria mergulhar na Grande Barreira de Corais.",
-            "Trocou seu dinheiro por Dólares Australianos.",
-            "Comprou um bumerangue artesanal em uma feira.",
-            "Comentou sobre viajar pelo grande deserto do Outback."
+            "Trocou seu dinheiro por Dólares Australianos."
         ]
     }
 }
@@ -317,18 +257,12 @@ locais_geograficos = ["Banco", "Aeroporto", "Porto", "Livraria", "Mercado Centra
 # 3. SISTEMA DE PROGRESSÃO E PATENTES
 # ==========================================
 def calcular_dificuldade(casos):
-    if casos == 0:
-        return "Recruta", 4, 120, False
-    elif casos == 1:
-        return "Detetive Júnior", 5, 110, False
-    elif casos == 2:
-        return "Detetive Particular", 6, 100, False
-    elif casos == 3:
-        return "Investigador", 7, 90, False
-    elif casos == 4:
-        return "Detetive de Elite", 8, 80, False
-    else:
-        return "Super Detetive", 9, 80, True
+    if casos == 0: return "Recruta", 4, 120, False
+    elif casos == 1: return "Detetive Júnior", 5, 110, False
+    elif casos == 2: return "Detetive Particular", 6, 100, False
+    elif casos == 3: return "Investigador", 7, 90, False
+    elif casos == 4: return "Detetive de Elite", 8, 80, False
+    else: return "Super Detetive", 9, 80, True
 
 def sortear_locais():
     st.session_state.locais_cidade = random.sample(locais_fisicos, 1) + random.sample(locais_geograficos, 2)
@@ -341,7 +275,6 @@ def iniciar_nova_partida(venceu_anterior=False):
     if venceu_anterior:
         st.session_state.casos_resolvidos += 1
 
-    # Zera as seleções do computador da Interpol
     st.session_state.interpol_sexo = "---"
     st.session_state.interpol_cabelo = "---"
     st.session_state.interpol_olho = "---"
@@ -360,8 +293,7 @@ def iniciar_nova_partida(venceu_anterior=False):
 
     while len(rota_fuga) < tamanho_rota:
         opcoes = [c for c in mapa_mundi[rota_fuga[-1]]["conexoes"] if c not in rota_fuga]
-        if not opcoes:
-            break
+        if not opcoes: break
         proxima = random.choice(opcoes)
         rota_fuga.append(proxima)
 
@@ -389,12 +321,15 @@ if 'nome_jogador' not in st.session_state:
     st.session_state.nome_jogador = ""
 if 'artefato_roubado' not in st.session_state:
     st.session_state.artefato_roubado = ""
+if 'exibir_aviso_suspeito' not in st.session_state:
+    st.session_state.exibir_aviso_suspeito = False
+if 'nome_temporario' not in st.session_state:
+    st.session_state.nome_temporario = ""
+
 if 'horas_restantes' not in st.session_state:
     iniciar_nova_partida()
-    # Força a tela para 'inicio' no primeiro carregamento
     st.session_state.tela_atual = "inicio"
 
-# TRAVA CONTRA O CACHE DO NAVEGADOR
 if st.session_state.nome_jogador == "":
     st.session_state.tela_atual = "inicio"
 
@@ -418,17 +353,51 @@ if st.session_state.tela_atual == "inicio":
     col1, col2, col3 = st.columns([1,2,1])
     with col2:
         st.info("Para acessar o painel confidencial, identifique-se.")
-        nome_digitado = st.text_input("Qual o seu nome, detetive?")
         
-        if st.button("Identificar-se e Entrar", use_container_width=True):
-            if nome_digitado.strip() == "":
-                st.error("Você precisa digitar um nome!")
-            else:
-                st.session_state.nome_jogador = nome_digitado.title()
-                # Zera os casos para garantir jogo limpo
-                st.session_state.casos_resolvidos = 0
-                iniciar_nova_partida() # Cria a primeira missão de fato
-                st.rerun()
+        # LÓGICA NOVA: Easter Egg do Nome do Vilão
+        if not st.session_state.exibir_aviso_suspeito:
+            nome_digitado = st.text_input("Qual o seu nome, detetive?")
+            
+            if st.button("Identificar-se e Entrar", use_container_width=True):
+                if nome_digitado.strip() == "":
+                    st.error("Você precisa digitar um nome!")
+                else:
+                    nome_formatado = nome_digitado.strip().title()
+                    # Cria uma lista só com os nomes dos bandidos todos em letras minúsculas para comparar
+                    nomes_bandidos_minusculos = [v["nome"].lower() for v in banco_suspeitos]
+                    
+                    if nome_digitado.strip().lower() in nomes_bandidos_minusculos:
+                        # Achou um bandido! Ativa o aviso e guarda o nome temporariamente
+                        st.session_state.nome_temporario = nome_formatado
+                        st.session_state.exibir_aviso_suspeito = True
+                        st.rerun()
+                    else:
+                        # Nome normal, segue o jogo direto
+                        st.session_state.nome_jogador = nome_formatado
+                        st.session_state.casos_resolvidos = 0
+                        iniciar_nova_partida()
+                        st.rerun()
+        
+        else:
+            # Se a variável for True, exibe o aviso ao invés da caixa de texto
+            st.warning(f"Huuuum, {st.session_state.nome_temporario}... você tem o nome de um dos bandidos cadastrados no nosso banco de dados do mal. Isso é muito suspeito! 🤨")
+            st.write("Deseja continuar com esse nome mesmo assim?")
+            
+            col_sim, col_nao = st.columns(2)
+            with col_sim:
+                if st.button("Sim, continuar", use_container_width=True):
+                    # Aceitou continuar com o nome suspeito
+                    st.session_state.nome_jogador = st.session_state.nome_temporario
+                    st.session_state.casos_resolvidos = 0
+                    st.session_state.exibir_aviso_suspeito = False
+                    iniciar_nova_partida()
+                    st.rerun()
+            with col_nao:
+                if st.button("Não, trocar de nome", use_container_width=True):
+                    # Desistiu do nome, reseta a tela para digitar de novo
+                    st.session_state.exibir_aviso_suspeito = False
+                    st.session_state.nome_temporario = ""
+                    st.rerun()
 
 # ----------------- TELA: BRIEFING -----------------
 elif st.session_state.tela_atual == "briefing":
@@ -450,7 +419,10 @@ elif st.session_state.tela_atual == "briefing":
         with col_b1:
             st.button("✅ Aceitar o Caso", on_click=mudar_tela, args=("jogo",), use_container_width=True)
         with col_b2:
-            st.button("❌ Recusar e Sair", on_click=mudar_tela, args=("inicio",), use_container_width=True)
+            def recusar_caso():
+                st.session_state.nome_jogador = "" # Apaga o nome para forçar a tela inicial
+                st.session_state.tela_atual = "inicio"
+            st.button("❌ Recusar e Sair", on_click=recusar_caso, use_container_width=True)
             
     with col_dados:
         st.metric(label="Casos Solucionados", value=st.session_state.casos_resolvidos)
@@ -465,7 +437,6 @@ elif st.session_state.tela_atual == "jogo":
     except:
         st.warning("Banner não encontrado.")
 
-    # Cabeçalho Superior
     col_header1, col_header2 = st.columns([3, 1])
     with col_header1:
         st.markdown(f"### Detetive: {st.session_state.nome_jogador} | Operação Ativa")
@@ -475,13 +446,11 @@ elif st.session_state.tela_atual == "jogo":
 
     st.divider()
 
-    # Fim de Jogo por Tempo
     if st.session_state.horas_restantes <= 0 and not st.session_state.jogo_acabou:
-        st.session_state.mensagem_tela = f"⏰ O TEMPO ACABOU! O vilão escapou. O culpado era: {st.session_state.vilao['nome']}."
+        st.session_state.mensagem_tela = f"⏰ O TEMPO ACABOU! O vilão escapou com {st.session_state.artefato_roubado}. O culpado era: {st.session_state.vilao['nome']}."
         st.session_state.jogo_acabou = True
         st.session_state.venceu_atual = False
 
-    # --- BARRA LATERAL: INTERPOL ---
     st.sidebar.header("💻 Computador da Interpol")
     st.sidebar.write("Cruze os dados para emitir o mandado. Custa 1h.")
 
@@ -514,7 +483,6 @@ elif st.session_state.tela_atual == "jogo":
             for s in filtrados:
                 st.sidebar.caption(f"- {s['nome']}")
 
-    # --- TELA PRINCIPAL ---
     st.subheader(f"📍 Local Atual: {st.session_state.local_atual.upper()}")
 
     url_imagem_cidade = mapa_mundi[st.session_state.local_atual]["imagem"]
@@ -532,7 +500,6 @@ elif st.session_state.tela_atual == "jogo":
     if not st.session_state.jogo_acabou:
         col_inv, col_via = st.columns(2)
         
-        # INVESTIGAR
         with col_inv:
             st.markdown("### 🔍 Investigar (2h)")
             for local in st.session_state.locais_cidade:
@@ -578,7 +545,6 @@ elif st.session_state.tela_atual == "jogo":
                         st.session_state.mensagem_tela = f"Testemunha no(a) {local}: 'Não vi ninguém suspeito por aqui.'"
                     st.rerun()
 
-        # VIAJAR
         with col_via:
             st.markdown("### ✈️ Viajar (8h)")
             destinos = mapa_mundi[st.session_state.local_atual]["conexoes"]
@@ -591,16 +557,15 @@ elif st.session_state.tela_atual == "jogo":
                     sortear_locais() 
                     st.rerun()
 
-        # ABANDONAR O CASO
         st.divider()
-        if st.button("🚪 Abandonar o Caso (Entregar Distintivo)"):
+        def abandonar_caso():
             st.session_state.jogo_acabou = True
             st.session_state.venceu_atual = False
-            st.session_state.nome_jogador = "" # Remove o nome para forçar a volta pro Início
+            st.session_state.nome_jogador = "" # Apaga o nome para forçar recomeço depois
             st.session_state.mensagem_tela = f"Você entregou seu distintivo e abandonou a investigação. O culpado era: {st.session_state.vilao['nome']}."
-            st.rerun()
+            
+        st.button("🚪 Abandonar o Caso (Entregar Distintivo)", on_click=abandonar_caso)
 
-    # TELA FINAL DA MISSÃO
     else:
         st.divider()
         
