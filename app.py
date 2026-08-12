@@ -566,9 +566,24 @@ elif st.session_state.tela_atual == "jogo":
             
         st.button("🚪 Abandonar o Caso (Entregar Distintivo)", on_click=abandonar_caso)
 
+    # TELA FINAL DA MISSÃO
     else:
         st.divider()
         
+        # ==========================================
+        # NOVO: VÍDEO DA INVASÃO (PERSEGUIÇÃO)
+        # ==========================================
+        # Verifica se o texto "achou o esconderijo" está na mensagem. 
+        # Isso impede que o vídeo toque se o detetive perder por falta de tempo.
+        if "achou o esconderijo" in st.session_state.mensagem_tela:
+            try:
+                # autoplay=True faz o vídeo tocar sozinho
+                # muted=True garante que navegadores não bloqueiem o início automático
+                st.video("policial.mp4", autoplay=True, muted=True) 
+            except:
+                st.warning("Vídeo da perseguição não encontrado.")
+        # ==========================================
+
         if st.session_state.venceu_atual:
             imagem_final = st.session_state.vilao.get("imagem_preso", st.session_state.vilao["imagem"])
             try:
