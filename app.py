@@ -568,15 +568,20 @@ elif st.session_state.tela_atual == "jogo":
     # ==========================================
     # TELA FINAL DA MISSÃO
     # ==========================================
+# ==========================================
+    # TELA FINAL DA MISSÃO
+    # ==========================================
     else:
         st.divider()
         
-        # 1. CENA DE SUSPENSE (Só acontece uma vez, quando acha o esconderijo)
-        tela_suspense = st.empty()
+        # 1. CENA DE SUSPENSE (Invasão do Policial)
+        tela_animacao = st.empty()
+        
         if "achou o esconderijo" in st.session_state.mensagem_tela:
-            with tela_suspense.container():
+            with tela_animacao.container():
                 st.markdown("<h3 style='text-align: center;'>🚨 INVASÃO EM ANDAMENTO... 🚨</h3>", unsafe_allow_html=True)
                 
+                # Colunas para centralizar o policial
                 col1, col2, col3 = st.columns([1, 2, 1])
                 with col2:
                     try:
@@ -584,31 +589,42 @@ elif st.session_state.tela_atual == "jogo":
                     except:
                         st.warning("⚠️ Arquivo 'policial.gif' não encontrado.")
                 
-                time.sleep(6) # Espera 6 segundos para manter o suspense
+                # TEMPO DE SUSPENSE (Ajuste para o tempo exato do policial correndo)
+                time.sleep(7) 
                 
-            tela_suspense.empty() # Apaga o GIF depois do tempo passar
-            
-            # Troca o texto secreto na memória para a animação não repetir
+            tela_animacao.empty() 
             st.session_state.mensagem_tela = st.session_state.mensagem_tela.replace("achou o esconderijo", "encontrou o covil")
 
-        # 2. AQUI APARECE A MENSAGEM FINAL DE VITÓRIA OU DERROTA (DEPOIS DA ANIMAÇÃO)
+        # 2. MENSAGEM DE TEXTO FINAL
         if st.session_state.mensagem_tela:
             st.info(st.session_state.mensagem_tela)
 
-        # 3. FOTOS E BOTÃO FINAL
-        if st.session_state.venceu_atual:
-            imagem_final = st.session_state.vilao.get("imagem_preso", st.session_state.vilao["imagem"])
-            try:
-                st.image(imagem_final, width=250, caption=f"VILÃO CAPTURADO: {st.session_state.vilao['nome'].upper()}")
-            except:
-                st.warning(f"Imagem não encontrada: {imagem_final}")
-            st.success("Você solucionou o caso e o artefato foi devolvido! O seu registro foi atualizado.")
-        else:
-            imagem_final = st.session_state.vilao.get("imagem_fuga", st.session_state.vilao["imagem"])
-            try:
-                st.image(imagem_final, width=250, caption=f"VILÃO FORAGIDO: {st.session_state.vilao['nome'].upper()}")
-            except:
-                st.warning(f"Imagem não encontrada: {imagem_final}")
-            st.error("Caso encerrado sem sucesso. O artefato foi perdido para sempre.")
+        # 3. CENA DA REAÇÃO ESPECÍFICA DO VILÃO 
+        col1_vilao, col2_vilao, col3_vilao = st.columns([1, 2, 1])
+        
+        with col2_vilao:
+            if st.session_state.venceu_atual:
+                # VENCEU: Puxa o GIF específico da chave 'imagem_preso' daquele vilão
+                gif_derrotado = st.session_state.vilao.get("imagem_preso", st.session_state.vilao["imagem"])
+                
+                try:
+                    st.image(gif_derrotado, use_container_width=True, caption=f"VILÃO CAPTURADO: {st.session_state.vilao['nome'].upper()}")
+                except:
+                    st.warning(f"⚠️ Imagem {gif_derrotado} não encontrada.")
+                
+                st.success("Você solucionou o caso e o artefato foi devolvido! O seu registro foi atualizado.")
+                
+            else:
+                # PERDEU: Puxa o GIF específico da chave 'imagem_fuga' daquele vilão
+                gif_fugindo = st.session_state.vilao.get("imagem_fuga", st.session_state.vilao["imagem"])
+                
+                try:
+                    st.image(gif_fugindo, use_container_width=True, caption=f"VILÃO FORAGIDO: {st.session_state.vilao['nome'].upper()}")
+                except:
+                    st.warning(f"⚠️ Imagem {gif_fugindo} não encontrada.")
+                
+                st.error("Caso encerrado sem sucesso. O artefato foi perdido para sempre.")
             
-        st.button("🚔 Solicitar Novo Caso à DIE", on_click=iniciar_nova_partida, kwargs={"venceu_anterior": st.session_state.venceu_atual})
+            # Botão de reiniciar
+            st.write("---")
+            st.button("🚔 Solicitar Novo Caso à DIE", on_click=iniciar_nova_partida, kwargs={"venceu_anterior": st.session_state.venceu_atual}, use_container_width=True)
