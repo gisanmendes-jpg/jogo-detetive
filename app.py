@@ -19,12 +19,12 @@ banco_capangas = [
     {"nome": "Scarlet",  "sexo": "F", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Cicatriz", "imagem": "https://placehold.co/300x400/8B0000/FFFFFF?text=Scarlet"},
     {"nome": "Ryan",  "sexo": "M", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Jóia", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Ryan"},
     {"nome": "Mayah",  "sexo": "F", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Tapa olho", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Mayah"},
-    {"nome": "Elsa",  "sexo": "F", "cabelo": "Preto", "olho" : "Azul", "detalhes": "Jóia", "imagem": "elsa.jpg"},
-    {"nome": "Douma",  "sexo": "M", "cabelo": "Loiro", "olho" : "Amarelo", "detalhes": "Tatuagem", "imagem": "douma.jpg"},
-    {"nome": "Haru",  "sexo": "M", "cabelo": "Branco", "olho" : "Amarelo", "detalhes": "Tapa olho", "imagem": "haru.jpg"},
+    {"nome": "Elsa",  "sexo": "F", "cabelo": "Preto", "olho" : "Azul", "detalhes": "Jóia", "imagem": "elsa.jpg", "imagem_preso": "elsa.gif", "imagem_fuga": "elsa.gif"}},
+    {"nome": "Douma",  "sexo": "M", "cabelo": "Loiro", "olho" : "Amarelo", "detalhes": "Tatuagem", "imagem": "douma.jpg", "imagem_preso": "douma.gif", "imagem_fuga": "douma.gif"},
+    {"nome": "Haru",  "sexo": "M", "cabelo": "Branco", "olho" : "Amarelo", "detalhes": "Tapa olho", "imagem": "haru.jpg", "imagem_preso": "haru.gif", "imagem_fuga": "haru.gif"},
     {"nome": "Roger",  "sexo": "M", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Tatuagem", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Roger"},
     {"nome": "Clara",  "sexo": "F", "cabelo": "Preto", "olho" : "Azul", "detalhes": "Cicatriz", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Clara"},
-    {"nome": "Loira Burrinha",  "sexo": "F", "cabelo": "Loiro", "olho" : "Azul", "detalhes": "Jóia", "imagem": "lb.jpg"},
+    {"nome": "Loira Burrinha",  "sexo": "F", "cabelo": "Loiro", "olho" : "Azul", "detalhes": "Jóia", "imagem": "lb.jpg", "imagem_preso": "lb.gif", "imagem_fuga": "lb.gif"},
     {"nome": "Victor",  "sexo": "M", "cabelo": "Branco", "olho" : "Castanho", "detalhes": "Cicatriz", "imagem": "victor.jpg", "imagem_preso": "victor_triste.gif", "imagem_fuga": "victor_feliz.gif"}
 ]
 
