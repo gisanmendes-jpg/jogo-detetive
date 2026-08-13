@@ -584,7 +584,7 @@ elif st.session_state.tela_atual == "jogo":
                     except:
                         st.warning("⚠️ Arquivo 'policial.gif' não encontrado.")
                 
-                time.sleep(4) # Espera 4 segundos para manter o suspense
+                time.sleep(6) # Espera 6 segundos para manter o suspense
                 
             tela_suspense.empty() # Apaga o GIF depois do tempo passar
             
