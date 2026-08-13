@@ -1,6 +1,7 @@
 import streamlit as st
 import random
 from PIL import Image
+import time # Adicionamos isso lá no topo do arquivo junto com as outras importações
 
 # ==========================================
 # 1. SETUP DE PÁGINA (DEVE SER A PRIMEIRA COISA!)
@@ -620,9 +621,34 @@ elif st.session_state.tela_atual == "jogo":
         st.button("🚪 Abandonar o Caso (Entregar Distintivo)", on_click=abandonar_caso)
 
     # TELA FINAL DA MISSÃO
+# TELA FINAL DA MISSÃO
     else:
         st.divider()
         
+        # 1. CRIAMOS UM ESPAÇO VAZIO NA TELA (Para o suspense)
+        tela_suspense = st.empty()
+        
+        # 2. SE ELE ACHOU O ESCONDERIJO, RODAMOS A CENA DE AÇÃO
+        if "achou o esconderijo" in st.session_state.mensagem_tela:
+            with tela_suspense.container():
+                st.markdown("<h3 style='text-align: center;'>🚨 INVASÃO EM ANDAMENTO... 🚨</h3>", unsafe_allow_html=True)
+                
+                # Usamos colunas para deixar o GIF menor e centralizado
+                col1, col2, col3 = st.columns([1, 2, 1])
+                with col2:
+                    # O seu GIF do policial rodando!
+                    st.image("policial.gif", use_container_width=True) 
+                
+                # O SEGREDO DO SUSPENSE: Pausa o código por 4 segundos!
+                time.sleep(4) 
+                
+            # 3. DEPOIS DOS 4 SEGUNDOS, APAGA A CENA DE AÇÃO
+            tela_suspense.empty()
+            
+            # TRUQUE: Muda o texto da memória para a animação não repetir do nada
+            st.session_state.mensagem_tela = st.session_state.mensagem_tela.replace("achou o esconderijo", "Invasão concluída")
+
+        # 4. SÓ AGORA REVELA O RESULTADO FINAL
         if st.session_state.venceu_atual:
             imagem_final = st.session_state.vilao.get("imagem_preso", st.session_state.vilao["imagem"])
             try:
