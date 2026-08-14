@@ -14,7 +14,7 @@ st.set_page_config(page_title="DIE - Investigações", page_icon="🕵️", layo
 banco_capangas = [
     {"nome": "Gabi Aura Monster", "sexo": "F", "cabelo": "Castanho", "olho" : "Castanho", "detalhes": "Jóia", "imagem": "gabi.png", "imagem_preso": "gabi_triste.gif", "imagem_fuga": "gabi_feliz.gif"},
     {"nome": "Denji",  "sexo": "M", "cabelo": "Loiro", "olho" : "Castanho", "detalhes": "Tapa olho", "imagem": "denji.jpg", "imagem_preso": "denji_triste.gif", "imagem_fuga": "denji_feliz.gif"},
-    {"nome": "Nana",  "sexo": "F", "cabelo": "Ruivo", "olho" : "Amarelo", "detalhes": "Jóia", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Nana"},
+    {"nome": "Nana",  "sexo": "F", "cabelo": "Ruivo", "olho" : "Amarelo", "detalhes": "Jóia", "imagem": "nana.jpeg", "imagem_preso": "nana_triste.gif", "imagem_fuga": "nana_feliz.gif"},
     {"nome": "Gisa Estrela",  "sexo": "F", "cabelo": "Castanho", "olho" : "Castanho", "detalhes": "Tatuagem", "imagem": "gisa.png", "imagem_preso": "gisa_triste.gif", "imagem_fuga": "gisa_feliz.gif"},
     {"nome": "Scarlet",  "sexo": "F", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Cicatriz", "imagem": "https://placehold.co/300x400/8B0000/FFFFFF?text=Scarlet"},
     {"nome": "Ryan",  "sexo": "M", "cabelo": "Preto", "olho" : "Vermelho", "detalhes": "Jóia", "imagem": "https://placehold.co/300x400/555555/FFFFFF?text=Ryan"},
