@@ -568,63 +568,60 @@ elif st.session_state.tela_atual == "jogo":
     # ==========================================
     # TELA FINAL DA MISSÃO
     # ==========================================
-# ==========================================
-    # TELA FINAL DA MISSÃO
-    # ==========================================
+
     else:
         st.divider()
         
-        # 1. CENA DE SUSPENSE (Invasão do Policial)
-        tela_animacao = st.empty()
+        # 1. CRIAMOS O "TELEVISOR" MÁGICO (O espaço exato que vai trocar de conteúdo)
+        televisor = st.empty()
         
+        # Vamos pegar a mensagem de vitória ou derrota (cortando a frase "você invadiu o aeroporto...")
+        partes_msg = st.session_state.mensagem_tela.split('\n')
+        texto_resultado_final = partes_msg[-1] 
+
+        # 2. SE HOUVE INVASÃO (E a animação ainda não rodou nesta rodada)
         if "achou o esconderijo" in st.session_state.mensagem_tela:
-            with tela_animacao.container():
-                st.markdown("<h3 style='text-align: center;'>🚨 INVASÃO EM ANDAMENTO... 🚨</h3>", unsafe_allow_html=True)
+            
+            # LIGA O TELEVISOR NO CANAL 1: O POLICIAL
+            with televisor.container():
+                # Título que vai sumir depois
+                st.markdown("<h3 style='text-align: center; color: orange;'>🚨 INVASÃO EM ANDAMENTO... 🚨</h3>", unsafe_allow_html=True)
                 
-                # Colunas para centralizar o policial
+                # O GIF no centro
                 col1, col2, col3 = st.columns([1, 2, 1])
                 with col2:
                     try:
                         st.image("policial.gif", use_container_width=True) 
                     except:
                         st.warning("⚠️ Arquivo 'policial.gif' não encontrado.")
-                
-                # TEMPO DE SUSPENSE (Ajuste para o tempo exato do policial correndo)
+                        
+                # O TEMPO DE SUSPENSE
                 time.sleep(7) 
-                
-            tela_animacao.empty() 
-            st.session_state.mensagem_tela = st.session_state.mensagem_tela.replace("achou o esconderijo", "encontrou o covil")
 
-        # 2. MENSAGEM DE TEXTO FINAL
-        if st.session_state.mensagem_tela:
-            st.info(st.session_state.mensagem_tela)
+            # Troca a frase para a animação não rodar duas vezes se o navegador piscar
+            st.session_state.mensagem_tela = st.session_state.mensagem_tela.replace("achou o esconderijo", "covil localizado")
 
-        # 3. CENA DA REAÇÃO ESPECÍFICA DO VILÃO 
-        col1_vilao, col2_vilao, col3_vilao = st.columns([1, 2, 1])
-        
-        with col2_vilao:
-            if st.session_state.venceu_atual:
-                # VENCEU: Puxa o GIF específico da chave 'imagem_preso' daquele vilão
-                gif_derrotado = st.session_state.vilao.get("imagem_preso", st.session_state.vilao["imagem"])
-                
-                try:
-                    st.image(gif_derrotado, use_container_width=True, caption=f"VILÃO CAPTURADO: {st.session_state.vilao['nome'].upper()}")
-                except:
-                    st.warning(f"⚠️ Imagem {gif_derrotado} não encontrada.")
-                
-                st.success("Você solucionou o caso e o artefato foi devolvido! O seu registro foi atualizado.")
-                
-            else:
-                # PERDEU: Puxa o GIF específico da chave 'imagem_fuga' daquele vilão
-                gif_fugindo = st.session_state.vilao.get("imagem_fuga", st.session_state.vilao["imagem"])
-                
-                try:
-                    st.image(gif_fugindo, use_container_width=True, caption=f"VILÃO FORAGIDO: {st.session_state.vilao['nome'].upper()}")
-                except:
-                    st.warning(f"⚠️ Imagem {gif_fugindo} não encontrada.")
-                
-                st.error("Caso encerrado sem sucesso. O artefato foi perdido para sempre.")
+        # 3. LIGA O TELEVISOR NO CANAL 2: O VILÃO E O RESULTADO (Sobrescreve exatamente no mesmo lugar!)
+        with televisor.container():
             
-            # Botão de reiniciar
+            # A. Coloca o texto final (Parabéns ou O vilão escapou) no mesmo lugar onde estava "INVASÃO EM ANDAMENTO"
+            if st.session_state.venceu_atual:
+                st.markdown(f"<h3 style='text-align: center; color: #4CAF50;'>{texto_resultado_final}</h3>", unsafe_allow_html=True)
+                gif_vilao = st.session_state.vilao.get("imagem_preso", st.session_state.vilao["imagem"])
+                legenda = f"VILÃO CAPTURADO: {st.session_state.vilao['nome'].upper()}"
+            else:
+                st.markdown(f"<h3 style='text-align: center; color: #FF4B4B;'>{texto_resultado_final}</h3>", unsafe_allow_html=True)
+                gif_vilao = st.session_state.vilao.get("imagem_fuga", st.session_state.vilao["imagem"])
+                legenda = f"VILÃO FORAGIDO: {st.session_state.vilao['nome'].upper()}"
+
+            # B. Coloca o GIF do vilão no mesmo espaço central
+            col1, col2, col3 = st.columns([1, 2, 1])
+            with col2:
+                try:
+                    st.image(gif_vilao, use_container_width=True, caption=legenda)
+                except:
+                    st.warning(f"⚠️ Imagem não encontrada: {gif_vilao}")
+            
+            # C. Botão para jogar de novo aparece embaixo do vilão
             st.write("---")
             st.button("🚔 Solicitar Novo Caso à DIE", on_click=iniciar_nova_partida, kwargs={"venceu_anterior": st.session_state.venceu_atual}, use_container_width=True)
