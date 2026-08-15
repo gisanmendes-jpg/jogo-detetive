@@ -258,12 +258,13 @@ locais_geograficos = ["Banco", "Aeroporto", "Porto", "Livraria", "Mercado Centra
 # 3. SISTEMA DE PROGRESSÃO E PATENTES
 # ==========================================
 def calcular_dificuldade(casos):
-    if casos == 0: return "Recruta", 4, 120, False
-    elif casos == 1: return "Detetive Júnior", 5, 110, False
-    elif casos == 2: return "Detetive Particular", 6, 100, False
-    elif casos == 3: return "Investigador", 7, 90, False
-    elif casos == 4: return "Detetive de Elite", 8, 80, False
-    else: return "Super Detetive", 9, 80, True
+    # Retorna: Patente, tamanho_rota, horas_restantes, enfrenta_chefe, chance_mentira
+    if casos == 0: return "Recruta", 4, 120, False, 0.0          # 0% de chance de mentira
+    elif casos == 1: return "Detetive Júnior", 5, 110, False, 0.15 # 15% de chance
+    elif casos == 2: return "Detetive Particular", 6, 100, False, 0.25 # 25% de chance
+    elif casos == 3: return "Investigador", 7, 90, False, 0.35   # 35% de chance
+    elif casos == 4: return "Detetive de Elite", 8, 80, False, 0.45 # 45% de chance
+    else: return "Super Detetive", 9, 80, True, 0.55             # 55% de chance
 
 def sortear_locais():
     st.session_state.locais_cidade = random.sample(locais_fisicos, 1) + random.sample(locais_geograficos, 2)
@@ -281,7 +282,8 @@ def iniciar_nova_partida(venceu_anterior=False):
     st.session_state.interpol_olho = "---"
     st.session_state.interpol_detalhe = "---"
 
-    patente, tamanho_rota, horas_restantes, enfrenta_chefe = calcular_dificuldade(st.session_state.casos_resolvidos)
+    # Agora a função recebe a chance_mentira também!
+    patente, tamanho_rota, horas_restantes, enfrenta_chefe, chance_mentira = calcular_dificuldade(st.session_state.casos_resolvidos)
     
     if enfrenta_chefe:
         vilao = random.choice(banco_chefes) if random.choice([True, False]) else random.choice(banco_capangas)
@@ -303,6 +305,7 @@ def iniciar_nova_partida(venceu_anterior=False):
     st.session_state.rota_fuga = rota_fuga
     st.session_state.local_atual = rota_fuga[0]
     st.session_state.horas_restantes = horas_restantes
+    st.session_state.chance_mentira = chance_mentira # Salvando a chance na memória
     st.session_state.mandado_ativo = None
     st.session_state.jogo_acabou = False
     st.session_state.mensagem_tela = ""
@@ -524,25 +527,58 @@ elif st.session_state.tela_atual == "jogo":
                         else:
                             proximo_destino = st.session_state.rota_fuga[indice + 1]
                             
-                            if local in locais_fisicos: 
-                                dicas_fisicas = [
-                                    f"Notei que era uma pessoa do sexo {st.session_state.vilao['sexo']}.",
-                                    f"A pessoa tinha cabelo {st.session_state.vilao['cabelo']}.",
-                                    f"Reparei que a pessoa tinha olhos de cor {st.session_state.vilao['olho']}."
-                                ]
-                                if st.session_state.vilao["detalhes"] == "---":
-                                    dicas_fisicas.append("Não notei nenhuma joia, tatuagem, cicatriz ou tapa olho.")
-                                else:
-                                    dicas_fisicas.append(f"Me chamou a atenção que a pessoa tinha um(a) {st.session_state.vilao['detalhes']}.")
-                                    
-                                dica = random.choice(dicas_fisicas)
-                            else: 
-                                dica = random.choice(mapa_mundi[proximo_destino]["fatos"])
+                            # ROLA O DADO: É mentiroso ou testemunha real?
+                            sorteio = random.random()
+                            
+                            if sorteio < st.session_state.chance_mentira:
+                                # ====== COMPARSA MENTIROSO ======
                                 
-                            st.session_state.mensagem_tela = f"Testemunha no(a) {local}: '{dica}'"
-                    else:
-                        st.session_state.mensagem_tela = f"Testemunha no(a) {local}: 'Não vi ninguém suspeito por aqui.'"
-                    st.rerun()
+                                # Frases que dão a dica de que ele está mentindo!
+                                comparsas_frases = [
+                                    f"Um homem no(a) {local} gaguejou:",
+                                    f"Uma mulher falou apressadamente:",
+                                    f"Um sujeito com um sorriso forçado tentou te despistar:",
+                                    f"Alguém olhando para os lados falou:",
+                                    f"Um funcionário passando rápido declarou:",
+                                    f"Uma pessoa guardando um maço de dinheiro no bolso disse:"
+                                ]
+                                intro_mentirosa = random.choice(comparsas_frases)
+                                
+                                if local in locais_fisicos:
+                                    # Pega um vilão diferente para dar a dica física errada
+                                    vilao_falso = random.choice([v for v in banco_suspeitos if v["nome"] != st.session_state.vilao["nome"]])
+                                    dicas_erradas = [
+                                        f"'E-eu tenho quase certeza que vi alguém do sexo {vilao_falso['sexo']}.'",
+                                        f"'Se não me engano, a pessoa tinha cabelo {vilao_falso['cabelo']}...'",
+                                        f"'Olha, eu reparei muito nos olhos, acho que eram de cor {vilao_falso['olho']}.'"
+                                    ]
+                                    dica_texto = random.choice(dicas_erradas)
+                                else:
+                                    # Pega uma cidade diferente para dar a dica geográfica errada
+                                    cidades_erradas = [c for c in mapa_mundi.keys() if c != proximo_destino]
+                                    cidade_falsa = random.choice(cidades_erradas)
+                                    dica_texto = f"'{random.choice(mapa_mundi[cidade_falsa]['fatos'])}'"
+
+                                st.session_state.mensagem_tela = f"{intro_mentirosa} {dica_texto}"
+                                
+                            else:
+                                # ====== TESTEMUNHA REAL (A VERDADE) ======
+                                if local in locais_fisicos: 
+                                    dicas_fisicas = [
+                                        f"Notei que era uma pessoa do sexo {st.session_state.vilao['sexo']}.",
+                                        f"A pessoa tinha cabelo {st.session_state.vilao['cabelo']}.",
+                                        f"Reparei que a pessoa tinha olhos de cor {st.session_state.vilao['olho']}."
+                                    ]
+                                    if st.session_state.vilao["detalhes"] == "---":
+                                        dicas_fisicas.append("Não notei nenhuma joia, tatuagem, cicatriz ou tapa olho.")
+                                    else:
+                                        dicas_fisicas.append(f"Me chamou a atenção que a pessoa tinha um(a) {st.session_state.vilao['detalhes']}.")
+                                        
+                                    dica_texto = random.choice(dicas_fisicas)
+                                else: 
+                                    dica_texto = random.choice(mapa_mundi[proximo_destino]["fatos"])
+                                    
+                                st.session_state.mensagem_tela = f"Testemunha confiável no(a) {local}: '{dica_texto}'"
 
         with col_via:
             st.markdown("### ✈️ Viajar (8h)")
