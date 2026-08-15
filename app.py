@@ -585,7 +585,7 @@ elif st.session_state.tela_atual == "jogo":
                                 else: 
                                     dica_texto = random.choice(mapa_mundi[proximo_destino]["fatos"])
                                     
-                                st.session_state.mensagem_tela = f"Testemunha confiável no(a) {local}: '{dica_texto}'"
+                                st.session_state.mensagem_tela = f"Testemunha no(a) {local} relatou: '{dica_texto}'"
 
         with col_via:
             st.markdown("### ✈️ Viajar (8h)")
