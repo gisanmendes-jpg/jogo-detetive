@@ -290,7 +290,6 @@ def iniciar_nova_partida(venceu_anterior=False):
     st.session_state.interpol_olho = "---"
     st.session_state.interpol_detalhe = "---"
 
-    # Agora a função recebe a chance_mentira também!
     patente, tamanho_rota, horas_restantes, enfrenta_chefe, chance_mentira = calcular_dificuldade(st.session_state.casos_resolvidos)
     
     if enfrenta_chefe:
@@ -435,9 +434,7 @@ elif st.session_state.tela_atual == "briefing":
 # ----------------- TELA: JOGO -----------------
 elif st.session_state.tela_atual == "jogo":
     try:
-        imagem_original = Image.open("banner.jpg")
-        imagem_achatada = imagem_original.resize((1200, 400))
-        st.image(imagem_achatada)
+        st.image(carregar_banner()) 
     except:
         st.warning("Banner não encontrado.")
 
@@ -503,17 +500,15 @@ elif st.session_state.tela_atual == "jogo":
     # ==========================================
     if not st.session_state.jogo_acabou:
         
-        # AQUI APARECEM AS MENSAGENS DAS TESTEMUNHAS E VIAGENS!
         if st.session_state.mensagem_tela:
             st.info(st.session_state.mensagem_tela)
 
         col_inv, col_via = st.columns(2)
         
-       with col_inv:
+        with col_inv:
             st.markdown("### 🔍 Investigar (2h)")
             for local in st.session_state.locais_cidade:
                 
-                # Botão COM a chave de segurança para evitar o bug do clique duplo!
                 if st.button(f"🏢 Ir para: {local}", key=f"btn_{local}"):
                     st.session_state.horas_restantes -= 2
                     
@@ -535,13 +530,10 @@ elif st.session_state.tela_atual == "jogo":
                         else:
                             proximo_destino = st.session_state.rota_fuga[indice + 1]
                             
-                            # ROLA O DADO: É mentiroso ou testemunha real?
                             sorteio = random.random()
                             
                             if sorteio < st.session_state.chance_mentira:
                                 # ====== COMPARSA MENTIROSO ======
-                                
-                                # As suas frases perfeitas de suspense!
                                 comparsas_frases = [
                                     f"Testemunha no(a) {local} gaguejou:",
                                     f"Testemunha falou apressadamente:",
@@ -553,7 +545,6 @@ elif st.session_state.tela_atual == "jogo":
                                 intro_mentirosa = random.choice(comparsas_frases)
                                 
                                 if local in locais_fisicos:
-                                    # Pega um vilão diferente para dar a dica física errada
                                     vilao_falso = random.choice([v for v in banco_suspeitos if v["nome"] != st.session_state.vilao["nome"]])
                                     dicas_erradas = [
                                         f"'Tenho quase certeza que vi alguém do sexo {vilao_falso['sexo']}.'",
@@ -562,7 +553,6 @@ elif st.session_state.tela_atual == "jogo":
                                     ]
                                     dica_texto = random.choice(dicas_erradas)
                                 else:
-                                    # Pega uma cidade diferente para dar a dica geográfica errada
                                     cidades_erradas = [c for c in mapa_mundi.keys() if c != proximo_destino]
                                     cidade_falsa = random.choice(cidades_erradas)
                                     dica_texto = f"'{random.choice(mapa_mundi[cidade_falsa]['fatos'])}'"
@@ -589,10 +579,8 @@ elif st.session_state.tela_atual == "jogo":
                                 st.session_state.mensagem_tela = f"Testemunha no(a) {local} relatou: '{dica_texto}'"
                                 
                     else:
-                        # Quando o detetive investiga a cidade errada
                         st.session_state.mensagem_tela = f"Testemunha no(a) {local} relatou: 'Não vi ninguém suspeito por aqui.'"
                     
-                    # Atualiza a tela imediatamente (não deixe essa linha de fora!)
                     st.rerun()
 
         with col_via:
@@ -619,26 +607,19 @@ elif st.session_state.tela_atual == "jogo":
     # ==========================================
     # TELA FINAL DA MISSÃO
     # ==========================================
-
     else:
         st.divider()
         
-        # 1. CRIAMOS O "TELEVISOR" MÁGICO (O espaço exato que vai trocar de conteúdo)
         televisor = st.empty()
         
-        # Vamos pegar a mensagem de vitória ou derrota (cortando a frase "você invadiu o aeroporto...")
         partes_msg = st.session_state.mensagem_tela.split('\n')
         texto_resultado_final = partes_msg[-1] 
 
-        # 2. SE HOUVE INVASÃO (E a animação ainda não rodou nesta rodada)
         if "achou o esconderijo" in st.session_state.mensagem_tela:
             
-            # LIGA O TELEVISOR NO CANAL 1: O POLICIAL
             with televisor.container():
-                # Título que vai sumir depois
                 st.markdown("<h3 style='text-align: center; color: orange;'>🚨 INVASÃO EM ANDAMENTO... 🚨</h3>", unsafe_allow_html=True)
                 
-                # O GIF no centro
                 col1, col2, col3 = st.columns([1, 2, 1])
                 with col2:
                     try:
@@ -646,16 +627,12 @@ elif st.session_state.tela_atual == "jogo":
                     except:
                         st.warning("⚠️ Arquivo 'policial.gif' não encontrado.")
                         
-                # O TEMPO DE SUSPENSE
                 time.sleep(7) 
 
-            # Troca a frase para a animação não rodar duas vezes se o navegador piscar
             st.session_state.mensagem_tela = st.session_state.mensagem_tela.replace("achou o esconderijo", "covil localizado")
 
-        # 3. LIGA O TELEVISOR NO CANAL 2: O VILÃO E O RESULTADO (Sobrescreve exatamente no mesmo lugar!)
         with televisor.container():
             
-            # A. Coloca o texto final (Parabéns ou O vilão escapou) no mesmo lugar onde estava "INVASÃO EM ANDAMENTO"
             if st.session_state.venceu_atual:
                 st.markdown(f"<h3 style='text-align: center; color: #4CAF50;'>{texto_resultado_final}</h3>", unsafe_allow_html=True)
                 gif_vilao = st.session_state.vilao.get("imagem_preso", st.session_state.vilao["imagem"])
@@ -665,7 +642,6 @@ elif st.session_state.tela_atual == "jogo":
                 gif_vilao = st.session_state.vilao.get("imagem_fuga", st.session_state.vilao["imagem"])
                 legenda = f"VILÃO FORAGIDO: {st.session_state.vilao['nome'].upper()}"
 
-            # B. Coloca o GIF do vilão no mesmo espaço central
             col1, col2, col3 = st.columns([1, 2, 1])
             with col2:
                 try:
@@ -673,6 +649,5 @@ elif st.session_state.tela_atual == "jogo":
                 except:
                     st.warning(f"⚠️ Imagem não encontrada: {gif_vilao}")
             
-            # C. Botão para jogar de novo aparece embaixo do vilão
             st.write("---")
             st.button("🚔 Solicitar Novo Caso à DIE", on_click=iniciar_nova_partida, kwargs={"venceu_anterior": st.session_state.venceu_atual}, use_container_width=True)
