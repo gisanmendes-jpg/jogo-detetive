@@ -509,10 +509,12 @@ elif st.session_state.tela_atual == "jogo":
 
         col_inv, col_via = st.columns(2)
         
-        with col_inv:
+       with col_inv:
             st.markdown("### 🔍 Investigar (2h)")
             for local in st.session_state.locais_cidade:
-                if st.button(f"🏢 Ir para: {local}"):
+                
+                # Botão COM a chave de segurança para evitar o bug do clique duplo!
+                if st.button(f"🏢 Ir para: {local}", key=f"btn_{local}"):
                     st.session_state.horas_restantes -= 2
                     
                     if st.session_state.local_atual in st.session_state.rota_fuga:
@@ -530,7 +532,6 @@ elif st.session_state.tela_atual == "jogo":
                                 st.session_state.mensagem_tela += "\n❌ O vilão escapou! A polícia não tinha um mandado de prisão válido no nome dele."
                                 st.session_state.venceu_atual = False
                                 
-                            st.rerun()
                         else:
                             proximo_destino = st.session_state.rota_fuga[indice + 1]
                             
@@ -540,7 +541,7 @@ elif st.session_state.tela_atual == "jogo":
                             if sorteio < st.session_state.chance_mentira:
                                 # ====== COMPARSA MENTIROSO ======
                                 
-                                # Frases que dão a dica de que ele está mentindo!
+                                # As suas frases perfeitas de suspense!
                                 comparsas_frases = [
                                     f"Testemunha no(a) {local} gaguejou:",
                                     f"Testemunha falou apressadamente:",
@@ -555,9 +556,9 @@ elif st.session_state.tela_atual == "jogo":
                                     # Pega um vilão diferente para dar a dica física errada
                                     vilao_falso = random.choice([v for v in banco_suspeitos if v["nome"] != st.session_state.vilao["nome"]])
                                     dicas_erradas = [
-                                        f"'Testemunha falou que tem quase certeza que vi alguém do sexo {vilao_falso['sexo']}.'",
-                                        f"'Testemunha dise: Se não me engano, a pessoa tinha cabelo {vilao_falso['cabelo']}...'",
-                                        f"'Testemunha disse: Eu reparei muito nos olhos, acho que eram de cor {vilao_falso['olho']}.'"
+                                        f"'Tenho quase certeza que vi alguém do sexo {vilao_falso['sexo']}.'",
+                                        f"'Se não me engano, a pessoa tinha cabelo {vilao_falso['cabelo']}...'",
+                                        f"'Eu reparei muito nos olhos, acho que eram de cor {vilao_falso['olho']}.'"
                                     ]
                                     dica_texto = random.choice(dicas_erradas)
                                 else:
@@ -586,6 +587,13 @@ elif st.session_state.tela_atual == "jogo":
                                     dica_texto = random.choice(mapa_mundi[proximo_destino]["fatos"])
                                     
                                 st.session_state.mensagem_tela = f"Testemunha no(a) {local} relatou: '{dica_texto}'"
+                                
+                    else:
+                        # Quando o detetive investiga a cidade errada
+                        st.session_state.mensagem_tela = f"Testemunha no(a) {local} relatou: 'Não vi ninguém suspeito por aqui.'"
+                    
+                    # Atualiza a tela imediatamente (não deixe essa linha de fora!)
+                    st.rerun()
 
         with col_via:
             st.markdown("### ✈️ Viajar (8h)")
