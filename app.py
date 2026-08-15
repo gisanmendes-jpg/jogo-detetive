@@ -4,6 +4,14 @@ import time
 from PIL import Image
 
 # ==========================================
+# FUNÇÃO DE OTIMIZAÇÃO DE MEMÓRIA (CACHE)
+# ==========================================
+@st.cache_data
+def carregar_banner():
+    imagem_original = Image.open("banner.jpg")
+    return imagem_original.resize((1200, 400))
+    
+# ==========================================
 # 1. SETUP DE PÁGINA (DEVE SER A PRIMEIRA COISA!)
 # ==========================================
 st.set_page_config(page_title="DIE - Investigações", page_icon="🕵️", layout="wide")
@@ -344,9 +352,8 @@ if st.session_state.nome_jogador == "":
 # ----------------- TELA: INÍCIO -----------------
 if st.session_state.tela_atual == "inicio":
     try:
-        imagem_original = Image.open("banner.jpg")
-        imagem_achatada = imagem_original.resize((1200, 400))
-        st.image(imagem_achatada)
+        # Puxa o banner achatado da memória instantaneamente!
+        st.image(carregar_banner()) 
     except:
         st.warning("Banner não encontrado.")
         
