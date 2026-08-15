@@ -259,7 +259,7 @@ locais_geograficos = ["Banco", "Aeroporto", "Porto", "Livraria", "Mercado Centra
 # ==========================================
 def calcular_dificuldade(casos):
     # Retorna: Patente, tamanho_rota, horas_restantes, enfrenta_chefe, chance_mentira
-    if casos == 0: return "Recruta", 4, 120, False, 0.0          # 0% de chance de mentira
+    if casos == 0: return "Recruta", 4, 120, False, 0.1          # 10% de chance de mentira
     elif casos == 1: return "Detetive Júnior", 5, 110, False, 0.15 # 15% de chance
     elif casos == 2: return "Detetive Particular", 6, 100, False, 0.25 # 25% de chance
     elif casos == 3: return "Investigador", 7, 90, False, 0.35   # 35% de chance
