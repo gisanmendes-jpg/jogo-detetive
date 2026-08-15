@@ -542,12 +542,12 @@ elif st.session_state.tela_atual == "jogo":
                                 
                                 # Frases que dão a dica de que ele está mentindo!
                                 comparsas_frases = [
-                                    f"Um homem no(a) {local} gaguejou:",
-                                    f"Uma mulher falou apressadamente:",
-                                    f"Um sujeito com um sorriso forçado tentou te despistar:",
-                                    f"Alguém olhando para os lados falou:",
+                                    f"Testemunha no(a) {local} gaguejou:",
+                                    f"Testemunha falou apressadamente:",
+                                    f"Testemunha com um sorriso forçado tentou te despistar:",
+                                    f"Testemunha olhando para os lados falou:",
                                     f"Um funcionário passando rápido declarou:",
-                                    f"Uma pessoa guardando um maço de dinheiro no bolso disse:"
+                                    f"Testemunha guardando um maço de dinheiro no bolso disse:"
                                 ]
                                 intro_mentirosa = random.choice(comparsas_frases)
                                 
@@ -555,9 +555,9 @@ elif st.session_state.tela_atual == "jogo":
                                     # Pega um vilão diferente para dar a dica física errada
                                     vilao_falso = random.choice([v for v in banco_suspeitos if v["nome"] != st.session_state.vilao["nome"]])
                                     dicas_erradas = [
-                                        f"'E-eu tenho quase certeza que vi alguém do sexo {vilao_falso['sexo']}.'",
-                                        f"'Se não me engano, a pessoa tinha cabelo {vilao_falso['cabelo']}...'",
-                                        f"'Olha, eu reparei muito nos olhos, acho que eram de cor {vilao_falso['olho']}.'"
+                                        f"'Testemunha falou que tem quase certeza que vi alguém do sexo {vilao_falso['sexo']}.'",
+                                        f"'Testemunha dise: Se não me engano, a pessoa tinha cabelo {vilao_falso['cabelo']}...'",
+                                        f"'Testemunha disse: Eu reparei muito nos olhos, acho que eram de cor {vilao_falso['olho']}.'"
                                     ]
                                     dica_texto = random.choice(dicas_erradas)
                                 else:
